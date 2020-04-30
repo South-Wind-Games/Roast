@@ -1,3 +1,3 @@
 ﻿<component name="DependencyValidationManager">
-  <scope name="Roast" pattern="file[riderModule]:Assets/Scripts/*" />
+  <scope name="Roast" pattern="file[riderModule]:Assets/Scripts//*" />
 </component>

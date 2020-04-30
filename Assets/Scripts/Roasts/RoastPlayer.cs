@@ -1,14 +1,14 @@
-﻿using UnityEngine;
+﻿using Players;
+using UnityEngine;
 
-namespace Players
+namespace Roasts
 {
-    public class Player : MonoBehaviour, IDamageable
+    public class RoastPlayer : MonoBehaviour, IDamageable
     {
-        [SerializeField] private HP hp;
+        [SerializeField] private HP hp = new HP();
 
         #region IDamageable
         private HP HP => hp;
-
 
         public bool IsAlive => HP.IsAlive;
 
