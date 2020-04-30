@@ -3,7 +3,7 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "EntitiesAssembly"
+        "PlayerAssembly"
     ],
     "includePlatforms": [
         "Editor"
