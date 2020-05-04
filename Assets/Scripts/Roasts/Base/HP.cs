@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Players
+namespace Roasts.Base
 {
     [Serializable]
     public class HP : IDamageable

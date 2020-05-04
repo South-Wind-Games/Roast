@@ -1,9 +1,9 @@
 {
-    "name": "EditorTests",
+    "name": "EditorTestsAssembly",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "PlayerAssembly"
+        "RoastsBaseAssembly"
     ],
     "includePlatforms": [
         "Editor"

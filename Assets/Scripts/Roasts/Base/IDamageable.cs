@@ -1,4 +1,4 @@
-﻿namespace Players
+﻿namespace Roasts.Base
 {
     public interface IDamageable
     {
