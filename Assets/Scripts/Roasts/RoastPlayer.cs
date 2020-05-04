@@ -1,9 +1,9 @@
-﻿using Players;
+﻿using Roasts.Base;
 using UnityEngine;
 
 namespace Roasts
 {
-    public class RoastPlayer : IDamageable
+    public class RoastPlayer : MonoBehaviour, IDamageable
     {
         [SerializeField] private HP hp = new HP();
 
