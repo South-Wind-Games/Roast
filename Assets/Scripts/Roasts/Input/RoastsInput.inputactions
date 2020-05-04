@@ -2,7 +2,7 @@
     "name": "RoastsInput",
     "maps": [
         {
-            "name": "RoastWASD",
+            "name": "Default Mode",
             "id": "5c84e9eb-6d8c-4b42-871b-3dd5e8543ed8",
             "actions": [
                 {
@@ -11,6 +11,14 @@
                     "id": "82807604-d58a-4b56-a303-9ebde1803684",
                     "expectedControlType": "Button",
                     "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Aim",
+                    "type": "Value",
+                    "id": "93535ad5-da75-4f13-95c8-ee39a721204d",
+                    "expectedControlType": "Vector2",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
                     "interactions": ""
                 }
             ],
@@ -32,7 +40,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Default",
                     "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -43,7 +51,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Default",
                     "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -54,7 +62,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Default",
                     "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -65,10 +73,32 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Default",
                     "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "932b352d-f0fc-4846-a0c0-57773e06dc83",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d16932af-01f7-40df-bea3-1019db330cfd",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
