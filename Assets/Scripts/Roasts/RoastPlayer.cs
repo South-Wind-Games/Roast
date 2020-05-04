@@ -3,11 +3,14 @@ using UnityEngine;
 
 namespace Roasts
 {
-    public class RoastPlayer : MonoBehaviour, IDamageable
+    public class RoastPlayer : IDamageable
     {
         [SerializeField] private HP hp = new HP();
 
+        [SerializeField] private Renderer roastRenderer = null;
+
         #region IDamageable
+
         private HP HP => hp;
 
         public bool IsAlive => HP.IsAlive;
@@ -34,6 +37,15 @@ namespace Roasts
         {
             HP.Revive(healthPercentage);
         }
+
         #endregion
+
+        private void Start()
+        {
+            if (!isLocalPlayer)
+                return;
+
+            roastRenderer.material.color = Random.ColorHSV(0, 1);
+        }
     }
 }
