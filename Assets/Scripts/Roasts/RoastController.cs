@@ -14,16 +14,18 @@ namespace Roasts
         public CharacterController characterController;
 
         [BoxGroup("Movement Settings"), SerializeField]
-        private float moveSpeed = 10, turnSpeed = 10;
+        private float moveSpeed = 10;
 
         [BoxGroup("Diagnostics"), ShowInInspector, ReadOnly]
-        private Vector2 WASD;
+        private Vector3 WASD;
 
         #region Input
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            WASD = context.ReadValue<Vector2>();
+            var input = context.ReadValue<Vector2>();
+
+            WASD = new Vector3(input.x, 0, input.y);
         }
 
         #endregion
@@ -43,8 +45,7 @@ namespace Roasts
             if (!isLocalPlayer)
                 return;
 
-            transform.Rotate(0f, WASD.x * turnSpeed * Time.fixedDeltaTime, 0f);
-            //transform.Translate(Vector3.forward * (WASD.y * moveSpeed * Time.fixedDeltaTime));
+            transform.Translate(WASD * (moveSpeed * Time.fixedDeltaTime));
         }
     }
 }
