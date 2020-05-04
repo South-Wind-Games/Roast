@@ -2,13 +2,13 @@
     "name": "RoastsInput",
     "maps": [
         {
-            "name": "Move",
+            "name": "RoastWASD",
             "id": "5c84e9eb-6d8c-4b42-871b-3dd5e8543ed8",
             "actions": [
                 {
                     "name": "WASD",
-                    "type": "Value",
-                    "id": "8f3c8bd1-2f75-48f7-b69c-c7160c5331f1",
+                    "type": "Button",
+                    "id": "82807604-d58a-4b56-a303-9ebde1803684",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -16,8 +16,8 @@
             ],
             "bindings": [
                 {
-                    "name": "Axis",
-                    "id": "7d625145-a518-4308-9173-7ed320f06bca",
+                    "name": "2D Vector",
+                    "id": "2e69f500-2ca4-4205-8609-0f1f14f14bd2",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -28,101 +28,47 @@
                 },
                 {
                     "name": "up",
-                    "id": "8ff451f9-a8c2-4ab9-833b-cf3f177d48de",
+                    "id": "ba42df34-c46c-4e64-b49a-337e312f9180",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "",
                     "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
-                    "id": "df473535-eda0-42cf-9ae7-71ca24c103b4",
+                    "id": "b73f3f7b-07a7-4855-97f1-c7f637fe0827",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "",
                     "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
-                    "id": "6d5b5f4f-ae9e-496e-bddf-0bdfb622c9f1",
+                    "id": "bfcaebb5-e9e1-4fb5-8e5b-ae4df6dab9e2",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "",
                     "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
-                    "id": "f41ea0c6-513d-4ab2-9be0-2c7cd7eebbf8",
+                    "id": "48fa183c-4606-41d9-a784-f841711ee617",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "",
                     "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Rocket",
-            "id": "7c406b7f-9096-448e-a51b-98eded6b48b9",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "541448cb-d2f4-4457-bed3-17d053d54e7b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "18049c08-0fe6-4ee8-af87-75cc9fc5405b",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Default",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "SelfBomb",
-            "id": "3d8f77d0-08b7-4fda-bd3b-6d1c74931a39",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "0d80e06b-c04a-4148-9923-77192293fd5b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "e9e6737e-7c26-4d02-98a4-27385977c369",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }
