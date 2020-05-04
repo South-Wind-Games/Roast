@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6652867664407431477}
-  - component: {fileID: 7194080164722898670}
+  - component: {fileID: 8525967665018322937}
   - component: {fileID: 6652867664407431465}
   - component: {fileID: 8090594723488173232}
   - component: {fileID: 6652867664407431476}
@@ -120,7 +120,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7194080164722898670
+--- !u!114 &8525967665018322937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,8 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e996d840fd87b4140a161fc65a462a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   roastRenderer: {fileID: 6652867664407431475}
 --- !u!114 &6652867664407431465
 MonoBehaviour:
@@ -151,7 +149,6 @@ MonoBehaviour:
   syncInterval: 0.1
   characterController: {fileID: 6652867664407431464}
   moveSpeed: 10
-  turnSpeed: 50
 --- !u!114 &8090594723488173232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,9 +190,13 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 82807604-d58a-4b56-a303-9ebde1803684
     m_ActionName: RoastWASD/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 93535ad5-da75-4f13-95c8-ee39a721204d
+    m_ActionName: Default Mode/Aim[/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: RoastWASD
+  m_DefaultActionMap: Default Mode
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!33 &6652867664407431476
