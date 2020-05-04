@@ -1,21 +1,17 @@
-﻿using System;
-using Entities;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Roasts.Base;
 
 namespace Testing.Editor_Tests
 {
     [TestFixture]
-    public class EntityTest
+    public class HPTests
     {
-        class EntityMock : Entity
-        {
-            public EntityMock(float maxHP = 100) : base(maxHP)
-            {
-            }
+        HP testEntity;
 
-            public EntityMock(float maxHP, float startingHP) : base(maxHP, startingHP)
-            {
-            }
+        [SetUp]
+        public void SetUp()
+        {
+            testEntity = new HP();
         }
 
         #region Damage
@@ -24,45 +20,39 @@ namespace Testing.Editor_Tests
         public void TakeDamageReducesHPAmount()
         {
             // Assemble
-            Entity entity = new EntityMock();
-            float initialHP = entity.CurrentHP;
+            float initialHP = testEntity.CurrentHP;
             float damage = 5;
 
             // Act
-            entity.TakeDamage(damage);
+            testEntity.TakeDamage(damage);
 
             // Assert
-            Assert.AreEqual(initialHP - damage, entity.CurrentHP);
+            Assert.AreEqual(initialHP - damage, testEntity.CurrentHP);
         }
 
         [Test, Category("HP/Damage")]
         public void HPCannotGoBelowZero()
         {
-            // Assemble
-            Entity aliveEntity = new EntityMock(100, 1);
-
             // Act
-            aliveEntity.TakeDamage(10000);
+            testEntity.TakeDamage(testEntity.MaxHP * 100);
 
             // Assert
-            Assert.AreEqual(0, aliveEntity.CurrentHP);
+            Assert.AreEqual(0, testEntity.CurrentHP);
         }
 
         [Test, Category("HP/Damage")]
         public void CannotDamageDeadEntities()
         {
             // Assemble
-            float maxHP = 100;
-            Entity deadEntity = new EntityMock(maxHP);
-            deadEntity.TakeDamage(maxHP);
+            testEntity.TakeDamage(testEntity.CurrentHP);
 
-            if (deadEntity.IsAlive)
+            if (testEntity.IsAlive)
                 Assert.Fail("Entity should be dead at this point.");
 
             // Act and Assert
             try
             {
-                deadEntity.TakeDamage(100);
+                testEntity.TakeDamage(100);
                 Assert.Fail("Successfully attempted to damage a dead IDamageable. This shouldn't happen.");
             }
             catch (HP.AttemptToInteractWhenDeadException e)
@@ -78,20 +68,16 @@ namespace Testing.Editor_Tests
         [Test, Category("HP/Heal")]
         public void HPCannotGoAboveMaxHP()
         {
-            // Assemble
-            float maxHP = 100;
-            Entity entity = new EntityMock(maxHP);
-
             // Act
-            entity.TakeHealing(500);
-            entity.TakeDamage(50);
-            entity.TakeHealing(500);
+            testEntity.TakeHealing(500);
+            testEntity.TakeDamage(50);
+            testEntity.TakeHealing(500);
 
             // Assert
-            Assert.AreEqual(maxHP, entity.CurrentHP);
+            Assert.AreEqual(testEntity.MaxHP, testEntity.CurrentHP);
             try
             {
-                var unused = new EntityMock(10, 1000);
+                var unused = new HP(10, 1000);
                 Assert.Fail("Allowed to create Entity with lower maxHP than currentHP.");
             }
             catch (HP.AttemptToSetMaxHPLowerThanHealthException e)
@@ -104,32 +90,29 @@ namespace Testing.Editor_Tests
         public void TakeHealIncreasesHPAmount()
         {
             // Assemble
-            Entity entity = new EntityMock();
-            float initialHP = entity.CurrentHP;
+            float initialHP = testEntity.CurrentHP;
             float damage = 5;
 
             // Act
-            entity.TakeDamage(damage);
+            testEntity.TakeDamage(damage);
 
             // Assert
-            Assert.AreEqual(initialHP - damage, entity.CurrentHP);
+            Assert.AreEqual(initialHP - damage, testEntity.CurrentHP);
         }
 
         [Test, Category("HP/Heal")]
         public void CannotHealDeadEntities()
         {
             // Assemble
-            float maxHP = 100;
-            Entity deadEntity = new EntityMock(maxHP);
-            deadEntity.TakeDamage(maxHP);
+            testEntity.TakeDamage(testEntity.MaxHP);
 
-            if (deadEntity.IsAlive)
+            if (testEntity.IsAlive)
                 Assert.Fail("Entity should be dead at this point.");
 
             // Act and Assert
             try
             {
-                deadEntity.TakeHealing(100);
+                testEntity.TakeHealing(100);
                 Assert.Fail("Successfully attempted to heal a dead IDamageable. This shouldn't happen.");
             }
             catch (HP.AttemptToInteractWhenDeadException e)

@@ -1,13 +1,17 @@
-﻿using UnityEngine.Events;
+﻿using Roasts.Base;
+using UnityEngine;
 
-namespace Entities
+namespace Roasts
 {
-    public abstract class Entity : IDamageable
+    public class RoastPlayer : MonoBehaviour, IDamageable
     {
+        [SerializeField] private HP hp = new HP();
+
+        [SerializeField] private Renderer roastRenderer = null;
+
         #region IDamageable
 
-        private HP HP { get; }
-
+        private HP HP => hp;
 
         public bool IsAlive => HP.IsAlive;
 
@@ -16,6 +20,8 @@ namespace Entities
             get => HP.CurrentHP;
             set => HP.CurrentHP = value;
         }
+
+        public float MaxHP => HP.MaxHP;
 
         public void TakeDamage(float damage)
         {
@@ -34,18 +40,9 @@ namespace Entities
 
         #endregion
 
-        /// <summary>
-        /// Default Entity constructor.
-        /// </summary>
-        /// <param name="maxHP">The maximum HP this entity can have</param>
-        protected Entity(float maxHP = 100)
+        private void Start()
         {
-            HP = new HP(maxHP);
-        }
-
-        protected Entity(float maxHP, float startingHP) 
-        {
-            HP = new HP(maxHP: maxHP, startingHP: startingHP);
+            roastRenderer.material.color = Random.ColorHSV(0, 1);
         }
     }
 }

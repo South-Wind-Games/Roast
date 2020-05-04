@@ -1,13 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Entities
+namespace Roasts.Base
 {
+    [Serializable]
     public class HP : IDamageable
     {
         private float currentHP;
         private readonly float maxHP;
-
         public bool IsAlive { get; private set; }
 
         public float CurrentHP
@@ -23,6 +23,8 @@ namespace Entities
                 }
             }
         }
+
+        public float MaxHP => maxHP;
 
         public HP(float maxHP = 100)
         {

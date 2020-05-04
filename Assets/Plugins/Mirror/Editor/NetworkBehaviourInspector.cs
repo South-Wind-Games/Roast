@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Mirror
 {
-    [CustomEditor(typeof(NetworkBehaviour), true)]
+    [CustomEditor(typeof(NetworkBehaviour), false)]
     [CanEditMultipleObjects]
     public class NetworkBehaviourInspector : Editor
     {
