@@ -42,9 +42,6 @@ namespace Roasts
 
         private void Start()
         {
-            if (!isLocalPlayer)
-                return;
-
             roastRenderer.material.color = Random.ColorHSV(0, 1);
         }
     }
