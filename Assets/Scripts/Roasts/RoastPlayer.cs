@@ -1,9 +1,10 @@
-﻿using Roasts.Base;
+﻿using Mirror;
+using Roasts.Base;
 using UnityEngine;
 
 namespace Roasts
 {
-    public class RoastPlayer : MonoBehaviour, IDamageable
+    public class RoastPlayer : NetworkBehaviour, IDamageable
     {
         [SerializeField] private HP hp = new HP();
 
@@ -40,9 +41,19 @@ namespace Roasts
 
         #endregion
 
-        private void Start()
+        [SyncVar] private Color playerColor;
+
+        public override void OnStartServer()
         {
-            roastRenderer.material.color = Random.ColorHSV(0, 1);
+            base.OnStartServer();
+            playerColor = Random.ColorHSV(0f, 1f, 0.9f, 0.9f, 1f, 1f);
+        }
+
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+
+            roastRenderer.material.color = playerColor;
         }
     }
 }
