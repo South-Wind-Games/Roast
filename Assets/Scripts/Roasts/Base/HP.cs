@@ -63,7 +63,7 @@ namespace Roasts.Base
         }
 
         /// <summary>
-        /// Revives the Entity at <see cref="healthPercentage"/> % of its original maxHP (see <see cref="Entity(float)"/>).
+        /// Revives the Entity at <see cref="healthPercentage"/> % of its original maxHP (see <see cref="HP(float)"/>).
         /// </summary>
         /// <param name="healthPercentage">% from 0f to 1f of maxHP to revive target Entity.</param>
         public void Revive(float healthPercentage)
