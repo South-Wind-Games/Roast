@@ -1,7 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Roasts
 {
@@ -13,22 +12,11 @@ namespace Roasts
         // TODO: Convert to auto-reference.
         public CharacterController characterController;
 
-        [BoxGroup("Movement Settings"), SerializeField]
-        private float moveSpeed = 10;
+        [TabGroup("Movement Settings"), SerializeField]
+        private float moveSpeed = 10, rotationSpeed = 1;
 
-        [BoxGroup("Diagnostics"), ShowInInspector, ReadOnly]
-        private Vector3 WASD;
-
-        #region Input
-
-        public void OnMove(InputAction.CallbackContext context)
-        {
-            var input = context.ReadValue<Vector2>();
-
-            WASD = new Vector3(input.x, 0, input.y);
-        }
-
-        #endregion
+        [TabGroup("Diagnostics"), ShowInInspector, ReadOnly]
+        private Vector3 direction;
 
         #region Auto-References
 
@@ -40,12 +28,31 @@ namespace Roasts
 
         #endregion
 
+        public void MoveInDirection(Vector3 inputDirection)
+        {
+            direction = inputDirection;
+        }
+
+        public void MoveToPosition(Vector2 mousePosition)
+        {
+        }
+
+        public void Stop()
+        {
+        }
+
+        public void StopAndLookAt()
+        {
+            Stop();
+        }
+
         private void FixedUpdate()
         {
             if (!isLocalPlayer)
                 return;
 
-            transform.Translate(WASD * (moveSpeed * Time.fixedDeltaTime));
+            transform.Translate(direction * (moveSpeed * Time.fixedDeltaTime));
+            // TODO: Player needs to rotate to face the direction he's moving.
         }
     }
 }
