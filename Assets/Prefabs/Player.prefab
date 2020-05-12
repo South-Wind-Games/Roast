@@ -133,6 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e996d840fd87b4140a161fc65a462a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   roastRenderer: {fileID: 6652867664407431475}
 --- !u!114 &8090594723488173232
 MonoBehaviour:
@@ -275,7 +277,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!136 &6652867664407431474
 CapsuleCollider:
