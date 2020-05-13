@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Roasts.Base;
 
 namespace Testing.Editor_Tests
@@ -41,6 +42,22 @@ namespace Testing.Editor_Tests
         }
 
         [Test, Category("HP/Damage")]
+        public void CantDealNegativeDamage()
+        {
+            try
+            {
+                // Act
+                testEntity.TakeDamage(-100);
+                // Assert
+                Assert.Fail("Successfully attempted to deal negative damage. This shouldn't happen.");
+            }
+            catch (HP.AttemptToUseNegativeAbsoluteValue e)
+            {
+                Assert.Pass("Catched correct exception: " + e);
+            }
+        }
+
+        [Test, Category("HP/Damage")]
         public void CannotDamageDeadEntities()
         {
             // Assemble
@@ -49,10 +66,11 @@ namespace Testing.Editor_Tests
             if (testEntity.IsAlive)
                 Assert.Fail("Entity should be dead at this point.");
 
-            // Act and Assert
             try
             {
+                // Act
                 testEntity.TakeDamage(100);
+                // Assert
                 Assert.Fail("Successfully attempted to damage a dead IDamageable. This shouldn't happen.");
             }
             catch (HP.AttemptToInteractWhenDeadException e)
@@ -100,6 +118,22 @@ namespace Testing.Editor_Tests
             Assert.AreEqual(initialHP - damage, testEntity.CurrentHP);
         }
 
+        [Test, Category("HP/Damage")]
+        public void CantHealNegativeValue()
+        {
+            try
+            {
+                // Act
+                testEntity.TakeHealing(-100);
+                // Assert
+                Assert.Fail("Successfully attempted to heal a negative amount. This shouldn't happen.");
+            }
+            catch (HP.AttemptToUseNegativeAbsoluteValue e)
+            {
+                Assert.Pass("Catched correct exception: " + e);
+            }
+        }
+        
         [Test, Category("HP/Heal")]
         public void CannotHealDeadEntities()
         {
