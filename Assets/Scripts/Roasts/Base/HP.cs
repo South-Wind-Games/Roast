@@ -75,8 +75,10 @@ namespace Roasts.Base
         public class AttemptToSetMaxHPLowerThanHealthException : Exception
         {
         }
-
         public class AttemptToInteractWhenDeadException : Exception
+        {
+        }
+        public class AttemptToUseNegativeAbsoluteValue : Exception
         {
         }
     }
