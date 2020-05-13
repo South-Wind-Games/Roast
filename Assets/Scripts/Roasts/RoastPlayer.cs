@@ -4,7 +4,13 @@ using UnityEngine;
 
 namespace Roasts
 {
-    public class RoastPlayer : NetworkBehaviour, IDamageable
+    public class RoastPlayer
+#if ROAST_NETWORKING_ENABLED
+        : Mirror.NetworkBehaviour
+#else
+        : MonoBehaviour
+#endif
+            , IDamageable
     {
         [SerializeField] private HP hp = new HP();
 
@@ -41,6 +47,7 @@ namespace Roasts
 
         #endregion
 
+#if ROAST_NETWORKING_ENABLED
         [SyncVar] private Color playerColor;
 
         public override void OnStartServer()
@@ -55,5 +62,6 @@ namespace Roasts
 
             roastRenderer.material.color = playerColor;
         }
+#endif
     }
 }
