@@ -51,6 +51,9 @@ namespace Roasts.Base
         {
             if (!IsAlive)
                 throw new AttemptToInteractWhenDeadException();
+
+            if (damage < 0)
+                throw new AttemptToUseNegativeAbsoluteValue();
             CurrentHP -= damage;
         }
 
@@ -58,6 +61,9 @@ namespace Roasts.Base
         {
             if (!IsAlive)
                 throw new AttemptToInteractWhenDeadException();
+
+            if (healAmount < 0)
+                throw new AttemptToUseNegativeAbsoluteValue();
 
             CurrentHP = Mathf.Min(CurrentHP + healAmount, maxHP);
         }
@@ -75,9 +81,11 @@ namespace Roasts.Base
         public class AttemptToSetMaxHPLowerThanHealthException : Exception
         {
         }
+
         public class AttemptToInteractWhenDeadException : Exception
         {
         }
+
         public class AttemptToUseNegativeAbsoluteValue : Exception
         {
         }
