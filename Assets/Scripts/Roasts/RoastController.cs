@@ -46,8 +46,20 @@ namespace Roasts
             if (!isLocalPlayer)
                 return;
 #endif
-            transform.Translate(direction * (moveSpeed * Time.fixedDeltaTime), Space.World);
-            // TODO: Player needs to rotate to face the direction he's moving.
+            if (direction.sqrMagnitude > 0)
+            {
+                Transform roastTransform = transform;
+
+                roastTransform.Translate(direction * (moveSpeed * Time.fixedDeltaTime), Space.World);
+
+                Vector3 newDirection = Vector3.RotateTowards(
+                    roastTransform.forward,
+                    direction,
+                    Time.fixedDeltaTime * rotationSpeed,
+                    0.0f);
+
+                roastTransform.rotation = Quaternion.LookRotation(newDirection);
+            }
         }
     }
 }
