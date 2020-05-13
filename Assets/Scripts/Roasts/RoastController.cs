@@ -5,28 +5,22 @@ using UnityEngine;
 namespace Roasts
 {
     [Serializable]
-    [RequireComponent(typeof(CharacterController))]
+#if ROAST_NETWORKING_ENABLED
     [RequireComponent(typeof(Mirror.NetworkTransform))]
-    public class RoastController : Mirror.NetworkBehaviour
+#endif
+    public class RoastController
+#if ROAST_NETWORKING_ENABLED
+        : Mirror.NetworkBehaviour
+#else
+        : MonoBehaviour
+#endif
     {
-        // TODO: Convert to auto-reference.
-        public CharacterController characterController;
-
         [TabGroup("Movement Settings"), SerializeField]
         private float moveSpeed = 10, rotationSpeed = 1;
 
         [TabGroup("Diagnostics"), ShowInInspector, ReadOnly]
         private Vector3 direction;
 
-        #region Auto-References
-
-        void OnValidate()
-        {
-            if (characterController == null)
-                characterController = GetComponent<CharacterController>();
-        }
-
-        #endregion
 
         public void MoveInDirection(Vector3 inputDirection)
         {
@@ -48,11 +42,24 @@ namespace Roasts
 
         private void FixedUpdate()
         {
+#if ROAST_NETWORKING_ENABLED
             if (!isLocalPlayer)
                 return;
+#endif
+            if (direction.sqrMagnitude > 0)
+            {
+                Transform roastTransform = transform;
 
-            transform.Translate(direction * (moveSpeed * Time.fixedDeltaTime));
-            // TODO: Player needs to rotate to face the direction he's moving.
+                roastTransform.Translate(direction * (moveSpeed * Time.fixedDeltaTime), Space.World);
+
+                Vector3 newDirection = Vector3.RotateTowards(
+                    roastTransform.forward,
+                    direction,
+                    Time.fixedDeltaTime * rotationSpeed,
+                    0.0f);
+
+                roastTransform.rotation = Quaternion.LookRotation(newDirection);
+            }
         }
     }
 }
