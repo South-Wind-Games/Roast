@@ -7,9 +7,9 @@
             "actions": [
                 {
                     "name": "WASD",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "82807604-d58a-4b56-a303-9ebde1803684",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
@@ -22,17 +22,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Fire",
-                    "type": "Value",
-                    "id": "a9b32a91-d398-4a91-ba32-ddb0349e817e",
-                    "expectedControlType": "Vector2",
-                    "processors": "ScaleVector2",
-                    "interactions": ""
-                },
-                {
-                    "name": "Rocket",
+                    "name": "Select",
                     "type": "Button",
-                    "id": "97fe58d4-8ec4-4298-8c50-477ae8994ce2",
+                    "id": "8b6d7769-f0a9-43d3-a673-2d92f1070e74",
                     "expectedControlType": "Button",
                     "processors": "ScaleVector2(x=0.5,y=0.5)",
                     "interactions": ""
@@ -96,22 +88,11 @@
                 },
                 {
                     "name": "",
-                    "id": "6fce0cfc-524a-4735-9151-a75dbf234cf8",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "WASD",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "932b352d-f0fc-4846-a0c0-57773e06dc83",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
+                    "groups": "",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -129,34 +110,12 @@
                 },
                 {
                     "name": "",
-                    "id": "d6584cb6-b95b-4a41-a451-0721f9a11520",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
+                    "id": "2c80807d-1617-47fb-ac5b-6e10681d4339",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
                     "processors": "",
-                    "groups": "",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b88c9e39-bd81-441c-a177-76bc47299ac6",
-                    "path": "<Keyboard>/#(1)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Default",
-                    "action": "Rocket",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5957f4b5-93a4-4aed-8a64-fe0c460f0c2c",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Rocket",
+                    "groups": "Old School;Default",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -191,17 +150,6 @@
                 },
                 {
                     "devicePath": "<Mouse>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Joystick",
-            "bindingGroup": "Joystick",
-            "devices": [
-                {
-                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

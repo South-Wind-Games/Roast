@@ -24,13 +24,8 @@ namespace Roasts
 
         [TabGroup("Diagnostics"), ShowInInspector, ReadOnly]
         private Vector3 direction;
-        private  IEnumerator rotatePerFrame;
-        private Vector3 positionLook;
 
-        private void Start()
-        {
-            rotatePerFrame = RotatePerFrame();
-        }
+        private Vector3 worldPoint;
 
         public void MoveInDirection(Vector3 inputDirection)
         {
@@ -49,26 +44,31 @@ namespace Roasts
         public void LookAt()
         {
             Vector2 mousePoint = Mouse.current.position.ReadValue();
+
             Vector3 newMousePoint = new Vector3(mousePoint.x, 0, mousePoint.y);
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(newMousePoint);
-            positionLook = new Vector3(worldPoint.x, transform.position.y, worldPoint.y);
-            StartCoroutine(rotatePerFrame);
+            
+            worldPoint = Camera.main.ScreenToWorldPoint(newMousePoint);
+
+            StartCoroutine("RotatePerFrame");
+            
+            
         }
 
         IEnumerator RotatePerFrame()
         {
-            while (true)
-            {
-                Vector3 newDirection = Vector3.RotateTowards(
-                    transform.forward,
-                    positionLook,
-                    Time.fixedDeltaTime * (rotationSpeed - 3f),
-                    0.0f);
-                transform.rotation = Quaternion.LookRotation(newDirection);
-                yield return new WaitForEndOfFrame();
-            }
-        }
+            
+            Vector3 newDirection = Vector3.RotateTowards(
+                transform.forward,
+                worldPoint,
+                Time.fixedDeltaTime * rotationSpeed,
+                0.0f);
 
+            transform.rotation = Quaternion.LookRotation(newDirection);
+
+            
+            yield return new WaitForEndOfFrame();
+        }
+        
 
         private void FixedUpdate()
         {
@@ -78,9 +78,10 @@ namespace Roasts
 #endif
             if (direction.sqrMagnitude > 0)
             {
-                StopCoroutine(rotatePerFrame);
                 Transform roastTransform = transform;
+
                 roastTransform.Translate(direction * (moveSpeed * Time.fixedDeltaTime), Space.World);
+
                 Vector3 newDirection = Vector3.RotateTowards(
                     roastTransform.forward,
                     direction,
@@ -88,7 +89,10 @@ namespace Roasts
                     0.0f);
 
                 roastTransform.rotation = Quaternion.LookRotation(newDirection);
+
             }
+            
+            
         }
     }
 }
