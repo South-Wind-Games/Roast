@@ -20,6 +20,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "ScaleVector2(x=0.5,y=0.5)",
                     "interactions": ""
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "8b6d7769-f0a9-43d3-a673-2d92f1070e74",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -97,6 +105,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c80807d-1617-47fb-ac5b-6e10681d4339",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Old School;Default",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

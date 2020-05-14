@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 namespace Roasts.Input
 {
@@ -37,12 +39,15 @@ namespace Roasts.Input
             roastController.MoveInDirection(new Vector3(rawInput.x, 0, rawInput.y));
         }
 
-        public void OnRightClicked(InputAction.CallbackContext context)
-        {
-        }
 
-        public void OnRocketFire(InputAction.CallbackContext context)
+
+        public void OnSelect(InputAction.CallbackContext context)
         {
+            if (context.performed)
+            {
+                roastController.LookAt();
+            }
+            
         }
 
         public void OnSelfBomb(InputAction.CallbackContext context)

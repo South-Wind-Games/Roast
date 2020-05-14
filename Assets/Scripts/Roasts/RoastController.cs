@@ -1,6 +1,10 @@
 using System;
+using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 namespace Roasts
 {
@@ -21,24 +25,50 @@ namespace Roasts
         [TabGroup("Diagnostics"), ShowInInspector, ReadOnly]
         private Vector3 direction;
 
+        private Vector3 worldPoint;
 
         public void MoveInDirection(Vector3 inputDirection)
         {
             direction = inputDirection;
         }
-
+        
         public void MoveToPosition(Vector2 mousePosition)
         {
         }
 
         public void Stop()
         {
+            moveSpeed = 0;
         }
 
-        public void StopAndLookAt()
+        public void LookAt()
         {
-            Stop();
+            Vector2 mousePoint = Mouse.current.position.ReadValue();
+
+            Vector3 newMousePoint = new Vector3(mousePoint.x, 0, mousePoint.y);
+            
+            worldPoint = Camera.main.ScreenToWorldPoint(newMousePoint);
+
+            StartCoroutine("RotatePerFrame");
+            
+            
         }
+
+        IEnumerator RotatePerFrame()
+        {
+            
+            Vector3 newDirection = Vector3.RotateTowards(
+                transform.forward,
+                worldPoint,
+                Time.fixedDeltaTime * rotationSpeed,
+                0.0f);
+
+            transform.rotation = Quaternion.LookRotation(newDirection);
+
+            
+            yield return new WaitForEndOfFrame();
+        }
+        
 
         private void FixedUpdate()
         {
@@ -59,7 +89,10 @@ namespace Roasts
                     0.0f);
 
                 roastTransform.rotation = Quaternion.LookRotation(newDirection);
+
             }
+            
+            
         }
     }
 }
