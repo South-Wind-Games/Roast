@@ -177,6 +177,21 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 93535ad5-da75-4f13-95c8-ee39a721204d
     m_ActionName: Default Mode/Aim[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_MethodName: OnSelect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8b6d7769-f0a9-43d3-a673-2d92f1070e74
+    m_ActionName: Default Mode/Select[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Default Mode
