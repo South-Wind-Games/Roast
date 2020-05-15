@@ -20,9 +20,9 @@ public class @RoastsInput : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""WASD"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""82807604-d58a-4b56-a303-9ebde1803684"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -35,17 +35,9 @@ public class @RoastsInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Fire"",
-                    ""type"": ""Value"",
-                    ""id"": ""a9b32a91-d398-4a91-ba32-ddb0349e817e"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""ScaleVector2"",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Rocket"",
+                    ""name"": ""Select"",
                     ""type"": ""Button"",
-                    ""id"": ""97fe58d4-8ec4-4298-8c50-477ae8994ce2"",
+                    ""id"": ""8b6d7769-f0a9-43d3-a673-2d92f1070e74"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": ""ScaleVector2(x=0.5,y=0.5)"",
                     ""interactions"": """"
@@ -109,22 +101,11 @@ public class @RoastsInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6fce0cfc-524a-4735-9151-a75dbf234cf8"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""WASD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""932b352d-f0fc-4846-a0c0-57773e06dc83"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Joystick"",
+                    ""groups"": """",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -142,34 +123,12 @@ public class @RoastsInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d6584cb6-b95b-4a41-a451-0721f9a11520"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
+                    ""id"": ""2c80807d-1617-47fb-ac5b-6e10681d4339"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b88c9e39-bd81-441c-a177-76bc47299ac6"",
-                    ""path"": ""<Keyboard>/#(1)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Default"",
-                    ""action"": ""Rocket"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5957f4b5-93a4-4aed-8a64-fe0c460f0c2c"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Rocket"",
+                    ""groups"": ""Old School;Default"",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -208,17 +167,6 @@ public class @RoastsInput : IInputActionCollection, IDisposable
                     ""isOR"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Joystick"",
-            ""bindingGroup"": ""Joystick"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
         }
     ]
 }");
@@ -226,8 +174,7 @@ public class @RoastsInput : IInputActionCollection, IDisposable
         m_DefaultMode = asset.FindActionMap("Default Mode", throwIfNotFound: true);
         m_DefaultMode_WASD = m_DefaultMode.FindAction("WASD", throwIfNotFound: true);
         m_DefaultMode_Aim = m_DefaultMode.FindAction("Aim", throwIfNotFound: true);
-        m_DefaultMode_Fire = m_DefaultMode.FindAction("Fire", throwIfNotFound: true);
-        m_DefaultMode_Rocket = m_DefaultMode.FindAction("Rocket", throwIfNotFound: true);
+        m_DefaultMode_Select = m_DefaultMode.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -279,16 +226,14 @@ public class @RoastsInput : IInputActionCollection, IDisposable
     private IDefaultModeActions m_DefaultModeActionsCallbackInterface;
     private readonly InputAction m_DefaultMode_WASD;
     private readonly InputAction m_DefaultMode_Aim;
-    private readonly InputAction m_DefaultMode_Fire;
-    private readonly InputAction m_DefaultMode_Rocket;
+    private readonly InputAction m_DefaultMode_Select;
     public struct DefaultModeActions
     {
         private @RoastsInput m_Wrapper;
         public DefaultModeActions(@RoastsInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @WASD => m_Wrapper.m_DefaultMode_WASD;
         public InputAction @Aim => m_Wrapper.m_DefaultMode_Aim;
-        public InputAction @Fire => m_Wrapper.m_DefaultMode_Fire;
-        public InputAction @Rocket => m_Wrapper.m_DefaultMode_Rocket;
+        public InputAction @Select => m_Wrapper.m_DefaultMode_Select;
         public InputActionMap Get() { return m_Wrapper.m_DefaultMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -304,12 +249,9 @@ public class @RoastsInput : IInputActionCollection, IDisposable
                 @Aim.started -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnAim;
-                @Fire.started -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnFire;
-                @Fire.performed -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnFire;
-                @Fire.canceled -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnFire;
-                @Rocket.started -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnRocket;
-                @Rocket.performed -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnRocket;
-                @Rocket.canceled -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnRocket;
+                @Select.started -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_DefaultModeActionsCallbackInterface.OnSelect;
             }
             m_Wrapper.m_DefaultModeActionsCallbackInterface = instance;
             if (instance != null)
@@ -320,12 +262,9 @@ public class @RoastsInput : IInputActionCollection, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
-                @Fire.started += instance.OnFire;
-                @Fire.performed += instance.OnFire;
-                @Fire.canceled += instance.OnFire;
-                @Rocket.started += instance.OnRocket;
-                @Rocket.performed += instance.OnRocket;
-                @Rocket.canceled += instance.OnRocket;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
             }
         }
     }
@@ -348,20 +287,10 @@ public class @RoastsInput : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_OldSchoolSchemeIndex];
         }
     }
-    private int m_JoystickSchemeIndex = -1;
-    public InputControlScheme JoystickScheme
-    {
-        get
-        {
-            if (m_JoystickSchemeIndex == -1) m_JoystickSchemeIndex = asset.FindControlSchemeIndex("Joystick");
-            return asset.controlSchemes[m_JoystickSchemeIndex];
-        }
-    }
     public interface IDefaultModeActions
     {
         void OnWASD(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
-        void OnRocket(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }

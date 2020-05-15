@@ -25,7 +25,18 @@ namespace Roasts
         [TabGroup("Diagnostics"), ShowInInspector, ReadOnly]
         private Vector3 direction;
 
-        private Vector3 worldPoint;
+        private Vector3 mouseDirection, mousePosition;
+
+        private IEnumerator rotatePerFrame;
+
+        public Camera camera;
+
+
+        private void Awake()
+        {
+            rotatePerFrame = RotatePerFrame();
+            camera = Camera.main;
+        }
 
         public void MoveInDirection(Vector3 inputDirection)
         {
@@ -41,32 +52,35 @@ namespace Roasts
             moveSpeed = 0;
         }
 
-        public void LookAt()
+        public void LookAt(Vector3 inputDirection)
         {
-            Vector2 mousePoint = Mouse.current.position.ReadValue();
+            // // Vector2 mousePoint = Mouse.current.position.ReadValue();
+            //
+            // Vector3 newMousePoint = new Vector3(mousePoint.x, 0, mousePoint.y);
+            mouseDirection = inputDirection;
+            
+            Vector3 worldPoint = camera.ScreenToWorldPoint(mouseDirection);
 
-            Vector3 newMousePoint = new Vector3(mousePoint.x, 0, mousePoint.y);
-            
-            worldPoint = Camera.main.ScreenToWorldPoint(newMousePoint);
+            mousePosition = new Vector3(worldPoint.x, transform.position.y, worldPoint.y);
 
-            StartCoroutine("RotatePerFrame");
-            
-            
+            StartCoroutine(rotatePerFrame);
+
         }
 
-        IEnumerator RotatePerFrame()
-        {
+         IEnumerator RotatePerFrame()
+         {
+            while (true)
+            {
+                Vector3 newDirection = Vector3.RotateTowards(
+                    transform.forward,
+                    mousePosition,
+                    Time.fixedDeltaTime * rotationSpeed,
+                    0.0f);
             
-            Vector3 newDirection = Vector3.RotateTowards(
-                transform.forward,
-                worldPoint,
-                Time.fixedDeltaTime * rotationSpeed,
-                0.0f);
-
-            transform.rotation = Quaternion.LookRotation(newDirection);
-
+                transform.rotation = Quaternion.LookRotation(newDirection);
             
-            yield return new WaitForEndOfFrame();
+                yield return null;
+            }
         }
         
 
@@ -89,6 +103,8 @@ namespace Roasts
                     0.0f);
 
                 roastTransform.rotation = Quaternion.LookRotation(newDirection);
+
+                StopCoroutine(rotatePerFrame);
 
             }
             
