@@ -39,12 +39,9 @@ namespace Roasts.Input
             roastController.MoveInDirection(new Vector3(rawInput.x, 0, rawInput.y));
         }
 
-
-
         public void OnSelect(InputAction.CallbackContext context)
         {
-            var rawInput = Mouse.current.position.ReadValue();
-            roastController.LookAt(new Vector3(rawInput.x, 0, rawInput.y));
+            roastController.LookAt(Mouse.current.position.ReadValue());
         }
 
         public void OnSelfBomb(InputAction.CallbackContext context)

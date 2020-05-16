@@ -25,16 +25,11 @@ namespace Roasts
         [TabGroup("Diagnostics"), ShowInInspector, ReadOnly]
         private Vector3 direction;
 
-        private Vector3 mouseDirection, mousePosition;
-
-        private IEnumerator rotatePerFrame;
-
         public Camera camera;
 
 
         private void Awake()
         {
-            rotatePerFrame = RotatePerFrame();
             camera = Camera.main;
         }
 
@@ -42,7 +37,7 @@ namespace Roasts
         {
             direction = inputDirection;
         }
-        
+
         public void MoveToPosition(Vector2 mousePosition)
         {
         }
@@ -52,37 +47,24 @@ namespace Roasts
             moveSpeed = 0;
         }
 
-        public void LookAt(Vector3 inputDirection)
+        public void LookAt(Vector2 mouseCoordinates)
         {
-            // // Vector2 mousePoint = Mouse.current.position.ReadValue();
-            //
-            // Vector3 newMousePoint = new Vector3(mousePoint.x, 0, mousePoint.y);
-            mouseDirection = inputDirection;
-            
-            Vector3 worldPoint = camera.ScreenToWorldPoint(mouseDirection);
+            Vector3 worldPoint = camera.ScreenToWorldPoint(new Vector3(mouseCoordinates.x, 0, mouseCoordinates.y));
 
-            mousePosition = new Vector3(worldPoint.x, transform.position.y, worldPoint.y);
-
-            StartCoroutine(rotatePerFrame);
-
+            StartCoroutine(LookAtRoutine(new Vector3(worldPoint.x, transform.position.y, worldPoint.z)));
         }
 
-         IEnumerator RotatePerFrame()
-         {
-            while (true)
+        IEnumerator LookAtRoutine(Vector3 lookAtPosition)
+        {
+            while (noLoEstemosMirando)
             {
-                Vector3 newDirection = Vector3.RotateTowards(
-                    transform.forward,
-                    mousePosition,
-                    Time.fixedDeltaTime * rotationSpeed,
-                    0.0f);
-            
-                transform.rotation = Quaternion.LookRotation(newDirection);
-            
-                yield return null;
+                if()
+                transform.Rotate(Vector3.up, rotationSpeed * Time.fixedDeltaTime);
+                
+                yield return new WaitForFixedUpdate();
             }
         }
-        
+
 
         private void FixedUpdate()
         {
@@ -105,10 +87,7 @@ namespace Roasts
                 roastTransform.rotation = Quaternion.LookRotation(newDirection);
 
                 StopCoroutine(rotatePerFrame);
-
             }
-            
-            
         }
     }
 }
