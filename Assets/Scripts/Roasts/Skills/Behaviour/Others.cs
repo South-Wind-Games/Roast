@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Roasts;
 using UnityEngine;
 
-public abstract class Others : MonoBehaviour
+public abstract class Others : Skill
 {
     // Start is called before the first frame update
     protected void OnTriggerEnter(Collider other) {}
