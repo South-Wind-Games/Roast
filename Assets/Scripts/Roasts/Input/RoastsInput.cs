@@ -124,7 +124,7 @@ public class @RoastsInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2c80807d-1617-47fb-ac5b-6e10681d4339"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Old School;Default"",
