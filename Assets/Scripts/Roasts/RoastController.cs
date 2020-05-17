@@ -19,19 +19,17 @@ namespace Roasts
         : MonoBehaviour
 #endif
     {
+        // TODO: Use Odin to show rotationSpeed in Degrees/Second
         [TabGroup("Movement Settings"), SerializeField]
         private float moveSpeed = 10, rotationSpeed = 1;
+
+        [TabGroup("Movement Settings"), SerializeField]
+        private Camera roastCamera = null;
 
         [TabGroup("Diagnostics"), ShowInInspector, ReadOnly]
         private Vector3 direction;
 
-        public Camera camera;
-
-
-        private void Awake()
-        {
-            camera = Camera.main;
-        }
+        private Coroutine rotateRoutine = null;
 
         public void MoveInDirection(Vector3 inputDirection)
         {
@@ -49,22 +47,65 @@ namespace Roasts
 
         public void LookAt(Vector2 mouseCoordinates)
         {
-            Vector3 worldPoint = camera.ScreenToWorldPoint(new Vector3(mouseCoordinates.x, 0, mouseCoordinates.y));
+            var cameraToEyeHeight = roastCamera.transform.position.y - transform.position.y;
 
-            StartCoroutine(LookAtRoutine(new Vector3(worldPoint.x, transform.position.y, worldPoint.z)));
+            var mouseCoordsNoY =
+                new Vector3(
+                    mouseCoordinates.x,
+                    mouseCoordinates.y,
+                    cameraToEyeHeight);
+
+            var screenToWorldPoint = roastCamera.ScreenToWorldPoint(mouseCoordsNoY);
+
+            // Debug.Log($"screen to world position: {worldPointYFixed}");
+            if (null != rotateRoutine)
+                StopCoroutine(rotateRoutine);
+
+            rotateRoutine = StartCoroutine(LookAtRoutine(screenToWorldPoint));
         }
 
         IEnumerator LookAtRoutine(Vector3 lookAtPosition)
         {
-            while (noLoEstemosMirando)
+            var roastTransform = transform;
+
+            var toClickDirection = (lookAtPosition - roastTransform.position).normalized;
+
+            // Angulo en radianes entre los vectores
+            float alpha = Mathf.Acos(Vector3.Dot(toClickDirection, roastTransform.forward));
+
+            // Cuanto voy a rotar este frame
+            float frameRotationDelta;
+
+            // Pa ke lao
+            bool sign = roastTransform.InverseTransformPoint(lookAtPosition).x > 0;
+
+            do
             {
-                if()
-                transform.Rotate(Vector3.up, rotationSpeed * Time.fixedDeltaTime);
+                // Cuanto roto este frame
+                frameRotationDelta = rotationSpeed * Time.fixedDeltaTime;
+                Debug.Log($"Delta: {frameRotationDelta}");
+
+                // No me paso de vueltas?
+                if (alpha >= frameRotationDelta)
+                    transform.Rotate(sign ? Vector3.up : Vector3.down, frameRotationDelta * Mathf.Rad2Deg);
+
+                yield return null;
+                // a = cos-1 ( A dot B )
+                alpha = Mathf.Acos(Vector3.Dot(toClickDirection, roastTransform.forward));
+                Debug.Log($"Alpha: {alpha}");
                 
-                yield return new WaitForFixedUpdate();
-            }
+            } while (alpha >= frameRotationDelta);
+
+            // Terminar de rotar lo que falta para estar exactamente con el mouse
+            transform.forward = toClickDirection;
+            rotateRoutine = null;
         }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, transform.position + transform.forward * 5);
+        }
 
         private void FixedUpdate()
         {
@@ -85,8 +126,6 @@ namespace Roasts
                     0.0f);
 
                 roastTransform.rotation = Quaternion.LookRotation(newDirection);
-
-                StopCoroutine(rotatePerFrame);
             }
         }
     }
