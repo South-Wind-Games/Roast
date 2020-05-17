@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Roasts;
 using UnityEngine;
 
-public abstract class Others : Skill
+public abstract class Others<T> : Skill<T> where T : SkillData
 {
     // Start is called before the first frame update
     protected void OnTriggerEnter(Collider other) {}
@@ -13,7 +13,7 @@ public abstract class Others : Skill
     protected void OnPlayerEnter(RoastPlayer other) {}
     protected void OnPlayerStay(RoastPlayer other) {}
     protected void OnPlayerExit(RoastPlayer other) {}
-    protected void OnSkillEnter(Skill other) {}
-    protected void OnSkillStay(Skill other) {}
-    protected void OnSkillExit(Skill other) {}
+    protected void OnSkillEnter(Skill<T> other) {}
+    protected void OnSkillStay(Skill<T> other) {}
+    protected void OnSkillExit(Skill<T> other) {}
 }
