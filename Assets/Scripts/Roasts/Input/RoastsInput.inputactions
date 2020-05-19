@@ -2,14 +2,14 @@
     "name": "RoastsInput",
     "maps": [
         {
-            "name": "Default Mode",
+            "name": "Roast Map",
             "id": "5c84e9eb-6d8c-4b42-871b-3dd5e8543ed8",
             "actions": [
                 {
-                    "name": "WASD",
-                    "type": "Button",
+                    "name": "Move",
+                    "type": "Value",
                     "id": "82807604-d58a-4b56-a303-9ebde1803684",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
@@ -32,13 +32,13 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "WASD",
                     "id": "2e69f500-2ca4-4205-8609-0f1f14f14bd2",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -49,7 +49,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Default",
-                    "action": "WASD",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -60,7 +60,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Default",
-                    "action": "WASD",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -71,7 +71,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Default",
-                    "action": "WASD",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -82,9 +82,20 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Default",
-                    "action": "WASD",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "bbb31180-868c-4a04-bce6-82fc4f60d166",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "StickDeadzone",
+                    "groups": "Joystick",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -120,140 +131,6 @@
                     "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "Joystick Mode",
-            "id": "d7cdc0fc-a69c-4c05-9c22-bdd28aebf5b7",
-            "actions": [
-                {
-                    "name": "Left Stick",
-                    "type": "Value",
-                    "id": "dc376564-6868-4742-b759-1698286ca0bd",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Right Stick",
-                    "type": "Value",
-                    "id": "d7feb6fc-9792-472b-81a0-c299b87bf115",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "2D Vector",
-                    "id": "15eb91c6-cc62-40ef-96ae-6135e04c8d77",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left Stick",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "8201def1-7e4e-4653-acff-967ae4280bc1",
-                    "path": "<Gamepad>/leftStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left Stick",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "54c8d9da-1305-420f-a693-00e65c8fbf60",
-                    "path": "<Gamepad>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left Stick",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "e2383b60-3adf-4b59-94d6-10f7dd990c33",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left Stick",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "119f0560-be06-48ff-a19d-becb70de5bf3",
-                    "path": "<Gamepad>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left Stick",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "8bf985a6-6cbf-4393-8871-4953bd3ef8a8",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right Stick",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "9163e1b9-0c92-4b5f-8ccf-77b105615e7a",
-                    "path": "<Gamepad>/rightStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right Stick",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "45264143-a921-4952-9569-c8ad9f2b3e08",
-                    "path": "<Gamepad>/rightStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right Stick",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "75e03065-b0cc-4d62-b033-987fa4daa398",
-                    "path": "<Gamepad>/rightStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right Stick",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "1b29eabd-9b9d-44f6-9715-9096c705d533",
-                    "path": "<Gamepad>/rightStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right Stick",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                }
-            ]
         }
     ],
     "controlSchemes": [
@@ -284,6 +161,17 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Joystick",
+            "bindingGroup": "Joystick",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }
