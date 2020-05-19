@@ -29,7 +29,7 @@ namespace Roasts
         [TabGroup("Diagnostics"), ShowInInspector, ReadOnly]
         private Vector3 direction;
 
-        private Coroutine rotateRoutine = null;
+        private Coroutine rotateRoutine, moveRoutine = null;
 
         public void MoveInDirection(Vector3 inputDirection)
         {
@@ -38,6 +38,7 @@ namespace Roasts
 
         public void MoveToPosition(Vector2 mousePosition)
         {
+            
         }
 
         public void Stop()
@@ -62,6 +63,30 @@ namespace Roasts
                 StopCoroutine(rotateRoutine);
 
             rotateRoutine = StartCoroutine(LookAtRoutine(screenToWorldPoint));
+            
+            if (null != moveRoutine)
+                StopCoroutine(moveRoutine);
+
+            moveRoutine = StartCoroutine(MoveAtRoutine(screenToWorldPoint));
+        }
+
+         IEnumerator MoveAtRoutine(Vector3 moveAtPosition)
+        {
+            Transform roastTransform = transform;
+
+            var toVector = moveAtPosition - roastTransform.position;
+            
+            //Esta variable calcula la dirección del vector resultante
+            var oldSchoolDirection = toVector.normalized;
+           
+            while ((moveAtPosition - roastTransform.position).sqrMagnitude > .01f)
+            {
+                roastTransform.Translate(oldSchoolDirection * (moveSpeed * Time.fixedDeltaTime), Space.World);
+
+                yield return null;
+            }
+
+            roastTransform.position = moveAtPosition;
         }
 
         IEnumerator LookAtRoutine(Vector3 lookAtPosition)
