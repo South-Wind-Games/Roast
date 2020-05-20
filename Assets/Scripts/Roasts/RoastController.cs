@@ -35,11 +35,11 @@ namespace Roasts
         {
             direction = inputDirection;
         }
-        
+
         public void Stop()
         {
             StopCoroutine(moveRoutine);
-            
+
             StopCoroutine(rotateRoutine);
         }
 
@@ -63,8 +63,8 @@ namespace Roasts
                 StopCoroutine(rotateRoutine);
 
             rotateRoutine = StartCoroutine(
-                                LookAtRoutine(
-                                    ScreenCoordinateToWorldPosition(mouseCoordinates)));
+                LookAtRoutine(
+                    ScreenCoordinateToWorldPosition(mouseCoordinates)));
         }
 
         public void MoveTo(Vector2 mouseCoordinates)
@@ -72,9 +72,11 @@ namespace Roasts
             if (null != moveRoutine)
                 StopCoroutine(moveRoutine);
 
-            moveRoutine = StartCoroutine(
-                            MoveToRoutine(
-                                ScreenCoordinateToWorldPosition(mouseCoordinates)));
+            var worldPos = ScreenCoordinateToWorldPosition(mouseCoordinates);
+
+            moveRoutine = StartCoroutine(MoveToRoutine(worldPos));
+
+            rotateRoutine = StartCoroutine(LookAtRoutine(worldPos));
         }
 
         IEnumerator MoveToRoutine(Vector3 moveAtPosition)
@@ -91,7 +93,7 @@ namespace Roasts
                 roastTransform.Translate(
                     oldSchoolDirection * (moveSpeed * Time.fixedDeltaTime), Space.World);
 
-                yield return null;
+                yield return new WaitForFixedUpdate();
             }
 
             roastTransform.position = moveAtPosition;
@@ -141,7 +143,8 @@ namespace Roasts
             {
                 Transform roastTransform = transform;
 
-                roastTransform.Translate(direction * (moveSpeed * Time.fixedDeltaTime), Space.World);
+                roastTransform.Translate(direction * (moveSpeed * Time.fixedDeltaTime), 
+                    Space.World);
 
                 Vector3 newDirection = Vector3.RotateTowards(
                     roastTransform.forward,
