@@ -28,6 +28,14 @@
                     "expectedControlType": "Button",
                     "processors": "ScaleVector2(x=0.5,y=0.5)",
                     "interactions": ""
+                },
+                {
+                    "name": "MoveToCoordinates",
+                    "type": "Button",
+                    "id": "3f42bc93-bd6c-49d2-a3e3-b9c23ea15896",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -103,7 +111,7 @@
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Joystick",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -114,7 +122,7 @@
                     "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Default",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -125,8 +133,19 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "Old School;Default",
+                    "groups": "Default",
                     "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c595ac2-62d8-451e-8f49-cb79bd3f6097",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Default",
+                    "action": "MoveToCoordinates",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -137,22 +156,6 @@
         {
             "name": "Default",
             "bindingGroup": "Default",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                },
-                {
-                    "devicePath": "<Mouse>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Old School",
-            "bindingGroup": "Old School",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
