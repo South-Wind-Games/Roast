@@ -35,53 +35,61 @@ namespace Roasts
         {
             direction = inputDirection;
         }
-
-        public void MoveToPosition(Vector2 mousePosition)
-        {
-            
-        }
-
+        
         public void Stop()
         {
-            moveSpeed = 0;
+            StopCoroutine(moveRoutine);
+            
+            StopCoroutine(rotateRoutine);
         }
 
-        public void LookAt(Vector2 mouseCoordinates)
+        private Vector3 ScreenCoordinateToWorldPosition(Vector2 coordinates)
         {
             var cameraToEyeHeight = roastCamera.transform.position.y - transform.position.y;
 
             var mouseCoordsNoY =
                 new Vector3(
-                    mouseCoordinates.x,
-                    mouseCoordinates.y,
+                    coordinates.x,
+                    coordinates.y,
                     cameraToEyeHeight);
 
-            var screenToWorldPoint = roastCamera.ScreenToWorldPoint(mouseCoordsNoY);
+            return roastCamera.ScreenToWorldPoint(mouseCoordsNoY);
+        }
 
+        public void LookAt(Vector2 mouseCoordinates)
+        {
             // Debug.Log($"screen to world position: {worldPointYFixed}");
             if (null != rotateRoutine)
                 StopCoroutine(rotateRoutine);
 
-            rotateRoutine = StartCoroutine(LookAtRoutine(screenToWorldPoint));
-            
+            rotateRoutine = StartCoroutine(
+                                LookAtRoutine(
+                                    ScreenCoordinateToWorldPosition(mouseCoordinates)));
+        }
+
+        public void MoveTo(Vector2 mouseCoordinates)
+        {
             if (null != moveRoutine)
                 StopCoroutine(moveRoutine);
 
-            moveRoutine = StartCoroutine(MoveAtRoutine(screenToWorldPoint));
+            moveRoutine = StartCoroutine(
+                            MoveToRoutine(
+                                ScreenCoordinateToWorldPosition(mouseCoordinates)));
         }
 
-         IEnumerator MoveAtRoutine(Vector3 moveAtPosition)
+        IEnumerator MoveToRoutine(Vector3 moveAtPosition)
         {
             Transform roastTransform = transform;
 
             var toVector = moveAtPosition - roastTransform.position;
-            
+
             //Esta variable calcula la dirección del vector resultante
             var oldSchoolDirection = toVector.normalized;
-           
+
             while ((moveAtPosition - roastTransform.position).sqrMagnitude > .01f)
             {
-                roastTransform.Translate(oldSchoolDirection * (moveSpeed * Time.fixedDeltaTime), Space.World);
+                roastTransform.Translate(
+                    oldSchoolDirection * (moveSpeed * Time.fixedDeltaTime), Space.World);
 
                 yield return null;
             }
@@ -108,7 +116,6 @@ namespace Roasts
             {
                 // Cuanto roto este frame
                 frameRotationDelta = rotationSpeed * Time.fixedDeltaTime;
-                Debug.Log($"Delta: {frameRotationDelta}");
 
                 // No me paso de vueltas?
                 if (alpha >= frameRotationDelta)
@@ -117,19 +124,11 @@ namespace Roasts
                 yield return null;
                 // a = cos-1 ( A dot B )
                 alpha = Mathf.Acos(Vector3.Dot(toClickDirection, roastTransform.forward));
-                Debug.Log($"Alpha: {alpha}");
-                
             } while (alpha >= frameRotationDelta);
 
             // Terminar de rotar lo que falta para estar exactamente con el mouse
             transform.forward = toClickDirection;
             rotateRoutine = null;
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, transform.position + transform.forward * 5);
         }
 
         private void FixedUpdate()
