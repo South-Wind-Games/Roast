@@ -275,7 +275,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9060272976174125301}
-        m_MethodName: OnMoveDirection
+        m_MethodName: OnMouseMoveTo
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -285,15 +285,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: dc376564-6868-4742-b759-1698286ca0bd
-    m_ActionName: Joystick Mode/Left Stick
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d7feb6fc-9792-472b-81a0-c299b87bf115
-    m_ActionName: Joystick Mode/Right Stick
+    m_ActionId: 3f42bc93-bd6c-49d2-a3e3-b9c23ea15896
+    m_ActionName: Roast Map/MoveToCoordinates[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Default Mode
+  m_DefaultActionMap: Roast Map
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &9060272976174125301
@@ -308,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e9ddbb3ebe8fa4c9bac20984062aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentInputMode: 1
   roastController: {fileID: 6652867664407431465}
 --- !u!114 &6652867664407431465
 MonoBehaviour:
@@ -321,8 +318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdef0b768e083ee4abd5b12025ca6cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  rotationSpeed: 5
+  moveSpeed: 5
+  rotationSpeed: 1
   roastCamera: {fileID: 0}
 --- !u!33 &6652867664407431476
 MeshFilter:
