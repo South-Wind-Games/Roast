@@ -1,10 +1,12 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 namespace Roasts.Input
 {
-	// TODO: It needs to require SkillsController
+    // TODO: It needs to require SkillsController
     [RequireComponent(typeof(RoastController))]
     public class InputManager : MonoBehaviour
     {
@@ -19,7 +21,8 @@ namespace Roasts.Input
 
         #region Auto-Reference
 
-        [SerializeField, HideInInspector] private RoastController roastController = null;
+        [SerializeField, HideInInspector]
+        private RoastController roastController = null;
 
         private void OnValidate()
         {
@@ -37,12 +40,10 @@ namespace Roasts.Input
             roastController.MoveInDirection(new Vector3(rawInput.x, 0, rawInput.y));
         }
 
-        public void OnRightClicked(InputAction.CallbackContext context)
+        public void OnSelect(InputAction.CallbackContext context)
         {
-        }
-
-        public void OnRocketFire(InputAction.CallbackContext context)
-        {
+            if (context.performed)
+                roastController.LookAt(Mouse.current.position.ReadValue());
         }
 
         public void OnSelfBomb(InputAction.CallbackContext context)
