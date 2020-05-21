@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Roasts;
+using Roasts.Skills.Behaviour;
 using UnityEngine;
 
 public abstract class Others<T> : Skill<T> where T : SkillData
