@@ -172,7 +172,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 218454fb0937742498160e130c4b09ab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -222,15 +222,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3780715554190641819, guid: 4904c2c9813e25741871d95cb7751d1b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6652867664407431465, guid: 4904c2c9813e25741871d95cb7751d1b,
         type: 3}
       propertyPath: rotationSpeed
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6652867664407431465, guid: 4904c2c9813e25741871d95cb7751d1b,
+        type: 3}
+      propertyPath: roastCamera
+      value: 
+      objectReference: {fileID: 1318298273}
     - target: {fileID: 6652867664407431472, guid: 4904c2c9813e25741871d95cb7751d1b,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652867664407431475, guid: 4904c2c9813e25741871d95cb7751d1b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6652867664407431477, guid: 4904c2c9813e25741871d95cb7751d1b,
         type: 3}

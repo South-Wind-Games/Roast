@@ -2,14 +2,14 @@
     "name": "RoastsInput",
     "maps": [
         {
-            "name": "Default Mode",
+            "name": "Roast Map",
             "id": "5c84e9eb-6d8c-4b42-871b-3dd5e8543ed8",
             "actions": [
                 {
-                    "name": "WASD",
-                    "type": "Button",
+                    "name": "Move",
+                    "type": "Value",
                     "id": "82807604-d58a-4b56-a303-9ebde1803684",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
@@ -20,17 +20,33 @@
                     "expectedControlType": "Vector2",
                     "processors": "ScaleVector2(x=0.5,y=0.5)",
                     "interactions": ""
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "8b6d7769-f0a9-43d3-a673-2d92f1070e74",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "MoveToCoordinates",
+                    "type": "Button",
+                    "id": "3f42bc93-bd6c-49d2-a3e3-b9c23ea15896",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
                 }
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "WASD",
                     "id": "2e69f500-2ca4-4205-8609-0f1f14f14bd2",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -41,7 +57,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Default",
-                    "action": "WASD",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -52,7 +68,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Default",
-                    "action": "WASD",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -63,7 +79,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Default",
-                    "action": "WASD",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -74,9 +90,20 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Default",
-                    "action": "WASD",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "bbb31180-868c-4a04-bce6-82fc4f60d166",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "StickDeadzone",
+                    "groups": "Joystick",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -84,7 +111,7 @@
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Joystick",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -95,8 +122,30 @@
                     "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Default",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c80807d-1617-47fb-ac5b-6e10681d4339",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Default",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c595ac2-62d8-451e-8f49-cb79bd3f6097",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Default",
+                    "action": "MoveToCoordinates",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -121,16 +170,11 @@
             ]
         },
         {
-            "name": "Old School",
-            "bindingGroup": "Old School",
+            "name": "Joystick",
+            "bindingGroup": "Joystick",
             "devices": [
                 {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                },
-                {
-                    "devicePath": "<Mouse>",
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }
