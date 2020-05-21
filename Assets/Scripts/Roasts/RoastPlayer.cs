@@ -1,5 +1,7 @@
 ﻿using Mirror;
 using Roasts.Base;
+using Roasts.Skills.Behaviour;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Roasts
@@ -8,7 +10,7 @@ namespace Roasts
 #if ROAST_NETWORKING_ENABLED
         : Mirror.NetworkBehaviour
 #else
-        : MonoBehaviour
+        : SerializedMonoBehaviour
 #endif
             , IDamageable
     {
@@ -46,6 +48,8 @@ namespace Roasts
         }
 
         #endregion
+
+        [SerializeField]private Skill<SkillData>[] skills;
 
 #if ROAST_NETWORKING_ENABLED
         [SyncVar] private Color playerColor;
