@@ -25,61 +25,6 @@ namespace Roasts
 
         #endregion
 
-        /// <summary>
-        ///     This gets called from InputManager to use the SkillName stored in that particular slot.
-        ///     We then ask the skillManager to give use the prefab that corresponds with that SkillName."/>
-        /// </summary>
-        /// <param name="slot">Which skillSlot should be used.</param>
-        public void UseSkill(SkillSlots slot)
-        {
-            StartCoroutine(RoastSkillAnimationRoutine(ownedSkills[slot].data));
-        }
-
-        private IEnumerator RoastSkillAnimationRoutine(SkillData skillData)
-        {
-            var skillPrefab = skillData.skillPrefab;
-
-            if (skillData.animationType == SkillStateMachine.SkillAnimationType.None)
-            {
-                InstantiateSkill(skillData.skillPrefab);
-            }
-            else
-            {
-                if (skillData.animationType == SkillStateMachine.SkillAnimationType.PreAnimation ||
-                    skillData.animationType == SkillStateMachine.SkillAnimationType.Both)
-                {
-                    animator.SetTrigger(PreAnimate);
-                    animationDone = false;
-                    yield return new WaitUntil(() => animationDone);
-
-                    InstantiateSkill(skillData.skillPrefab);
-                }
-
-                if (skillData.animationType == SkillStateMachine.SkillAnimationType.PostAnimation ||
-                    skillData.animationType == SkillStateMachine.SkillAnimationType.Both)
-                {
-                    animator.SetTrigger(PostAnimate);
-                    if (skillData.animationType == SkillStateMachine.SkillAnimationType.PostAnimation)
-                    {
-                        animationDone = false;
-                        yield return new WaitUntil(() => animationDone);
-                        InstantiateSkill(skillData.skillPrefab);
-                    }
-                }
-            }
-        }
-
-
-        private void InstantiateSkill(SkillBase skillPrefab)
-        {
-            Instantiate(skillPrefab); // TODO: Spawn correctly, not this shit.
-        }
-
-        public void OnAnimationComplete()
-        {
-            animationDone = true;
-        }
-
         #region IDamageable
 
         [SerializeField, BoxGroup("HP")]
@@ -114,19 +59,7 @@ namespace Roasts
 
         #endregion
 
-        #region Animations
-
-        [SerializeField, FoldoutGroup("References", -1)]
-        private Animator animator;
-
-        private bool animationDone;
-        private static readonly int PreAnimate = Animator.StringToHash("PreAnimate");
-        private static readonly int PostAnimate = Animator.StringToHash("PostAnimate");
-
-        #endregion
-
         #region Skills
-
         [Serializable]
         private struct OwnedSkill
         {
@@ -190,6 +123,73 @@ namespace Roasts
             ownedSkills.Add((SkillSlots) ownedSkills.Count, new OwnedSkill(skillName, skillData));
         }
 
+        /// <summary>
+        ///     This gets called from InputManager to use the SkillName stored in that particular slot.
+        ///     We then ask the skillManager to give use the prefab that corresponds with that SkillName."/>
+        /// </summary>
+        /// <param name="slot">Which skillSlot should be used.</param>
+        public void UseSkill(SkillSlots slot)
+        {
+            StartCoroutine(RoastSkillAnimationRoutine(ownedSkills[slot].data));
+        }
+
+        private IEnumerator RoastSkillAnimationRoutine(SkillData skillData)
+        {
+            var skillPrefab = skillData.skillPrefab;
+
+            if (skillData.animationType == SkillStateMachine.SkillAnimationType.None)
+            {
+                InstantiateSkill(skillData.skillPrefab);
+            }
+            else
+            {
+                if (skillData.animationType == SkillStateMachine.SkillAnimationType.PreAnimation ||
+                    skillData.animationType == SkillStateMachine.SkillAnimationType.Both)
+                {
+                    animator.SetTrigger(PreAnimate);
+                    animationDone = false;
+                    yield return new WaitUntil(() => animationDone);
+
+                    InstantiateSkill(skillData.skillPrefab);
+                }
+
+                if (skillData.animationType == SkillStateMachine.SkillAnimationType.PostAnimation ||
+                    skillData.animationType == SkillStateMachine.SkillAnimationType.Both)
+                {
+                    animator.SetTrigger(PostAnimate);
+                    if (skillData.animationType == SkillStateMachine.SkillAnimationType.PostAnimation)
+                    {
+                        animationDone = false;
+                        yield return new WaitUntil(() => animationDone);
+                        InstantiateSkill(skillData.skillPrefab);
+                    }
+                }
+            }
+        }
+
+
+        private void InstantiateSkill(SkillBase skillPrefab)
+        {
+            Instantiate(skillPrefab); // TODO: Spawn correctly, not this shit.
+        }
+
         #endregion
+        
+        #region Animations
+
+        [SerializeField, FoldoutGroup("References", -1)]
+        private Animator animator;
+
+        private bool animationDone;
+        private static readonly int PreAnimate = Animator.StringToHash("PreAnimate");
+        private static readonly int PostAnimate = Animator.StringToHash("PostAnimate");
+
+        public void OnAnimationComplete()
+        {
+            animationDone = true;
+        }
+
+        #endregion
+
     }
 }
