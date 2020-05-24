@@ -13,7 +13,40 @@ namespace Roasts.Input
             Default,
             Warlocks,
             Joystick
-        };
+        }
+
+        // For reference on the naming, see: https://love2d.org/w/images/d/d4/360_controller.png
+        // enum JoystickMap
+        // {
+        //     RB,
+        //     LB,
+        //     RT,
+        //     LT,
+        //     A,
+        //     B,
+        //     X,
+        //     Y,
+        //     DPAD_UP,
+        //     DPAD_DOWN,
+        //     DPAD_LEFT,
+        //     DPAD_RIGHT
+        // }
+
+        public enum SkillSlots
+        {
+            Primary,
+            Secondary,
+            QuickUseLeft,
+            QuickUseRight,
+            Extra_A1,
+            Extra_A2,
+            Extra_A3,
+            Extra_A4,
+            Extra_B1,
+            Extra_B2,
+            Extra_B3,
+            Extra_B4,
+        }
 
         [SerializeField, OnValueChanged(nameof(OnInputModeChanged))]
         private InputMode currentInputMode = InputMode.Default;
