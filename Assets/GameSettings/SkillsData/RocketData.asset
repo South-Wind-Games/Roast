@@ -21,8 +21,13 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  goldCost: 1
+  goldCost: 100
+  description: 
   coolDownTime: 1
   significantAmount: 11
   levelIncreaseCurves: []
+  animationType: 0
+  skillPrefab: {fileID: 0}
+  onCreateInstantiate: {fileID: 0}
+  onDestroyInstantiate: {fileID: 0}
   speed: 1
