@@ -1,16 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Roasts.Skills.Data;
 
-public abstract class Buff<T> : Skill<T> where T : SkillData
+namespace Roasts.Skills.Behaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
+    public abstract class Buff<T> : Skill<T> where T : SkillData
     {
     }
 }

@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Roasts.Skills.Data;
 
-public abstract class Projectile<T> : Others<T> where T : SkillData
+namespace Roasts.Skills.Behaviour
 {
-    
+    public abstract class Projectile<T> : Others<T> where T : SkillData
+    {
+    }
 }

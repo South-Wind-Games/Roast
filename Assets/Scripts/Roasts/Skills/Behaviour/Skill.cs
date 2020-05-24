@@ -1,32 +1,32 @@
-﻿using System;
+﻿using Roasts.Skills.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Roasts.Skills.Behaviour
 {
-    
-    public abstract class Skill<T> : SerializedMonoBehaviour where T : SkillData
+    public abstract class Skill<T> : SkillBase where T : SkillData
     {
-        [ShowInInspector, ReadOnly]
-        protected RoastPlayer owner;
-
-        [SerializeField, InlineEditor()]
+        [SerializeField, InlineEditor]
         protected T data;
 
-        [ShowInInspector]
-        protected int currentLevel;
+        [ShowInInspector, ReadOnly, ShowIf(nameof(IsApplicationRunning))]
+        protected RoastPlayer Owner;
 
+        protected int CurrentLevel { get; private set; } = 1;
 
-        // Start is called before the first frame update
-        void Start()
+        [Button, ShowIf(nameof(IsApplicationRunning))]
+        public void Use(RoastPlayer owner, int level)
         {
+            Owner = owner;
+            CurrentLevel = level;
+            OnSkillUse();
         }
 
-        // Update is called once per frame
-        void Update()
+        private bool IsApplicationRunning()
         {
+            return Application.isPlaying;
         }
 
-        public abstract void Use();
+        protected abstract void OnSkillUse();
     }
 }

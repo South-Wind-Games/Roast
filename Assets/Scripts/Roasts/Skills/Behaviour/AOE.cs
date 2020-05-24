@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Roasts.Skills.Data;
 
-public abstract class AOE<T> : Others<T> where T : SkillData
+namespace Roasts.Skills.Behaviour
 {
-    // Start is called before the first frame update
+    public abstract class AOE<T> : Others<T> where T : SkillData
+    {
+        // Start is called before the first frame update
+    }
 }

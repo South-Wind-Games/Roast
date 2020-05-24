@@ -1,16 +1,15 @@
 ﻿using System;
-using Sirenix.OdinInspector;
+using Roasts.Skills.Behaviour;
+using Roasts.Skills.Data;
 using UnityEngine;
 
 namespace Roasts.Skills.Actual
 {
-    [Serializable]
     public class Teleport : Skill<SkillData>
     {
-        [Button]
-        public override void Use()
+        protected override void OnSkillUse()
         {
-            Debug.Log($"Me movi {data.significantAmount * data.levelIncreaseCurves[0].Evaluate(currentLevel * .1f)}");
+            Debug.Log($"Me movi {data.significantAmount * data.levelIncreaseCurves[0].Evaluate(CurrentLevel * .1f)}");
         }
     }
 }
