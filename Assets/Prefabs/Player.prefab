@@ -211,7 +211,90 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e996d840fd87b4140a161fc65a462a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roastRenderer: {fileID: 6652867664407431475}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ownedSkills
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[Roasts.Input.InputManager+SkillSlots,
+        Assembly-CSharp],[Roasts.RoastPlayer+OwnedSkill, Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Roasts.Input.InputManager+SkillSlots,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 7
+      Data: Roasts.RoastPlayer+OwnedSkill, Assembly-CSharp
+    - Name: skillName
+      Entry: 3
+      Data: 0
+    - Name: level
+      Entry: 3
+      Data: 1
+    - Name: data
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 7
+      Data: Roasts.RoastPlayer+OwnedSkill, Assembly-CSharp
+    - Name: skillName
+      Entry: 3
+      Data: 0
+    - Name: level
+      Entry: 3
+      Data: 1
+    - Name: data
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  animator: {fileID: 9096800900620212133}
 --- !u!114 &8090594723488173232
 MonoBehaviour:
   m_ObjectHideFlags: 0
