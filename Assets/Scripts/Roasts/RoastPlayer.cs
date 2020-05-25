@@ -27,8 +27,7 @@ namespace Roasts
 
         #region IDamageable
 
-        [SerializeField, BoxGroup("HP")]
-        private HP hp = new HP();
+        [SerializeField, BoxGroup("HP")] private HP hp = new HP();
 
         private HP HP => hp;
 
@@ -60,24 +59,21 @@ namespace Roasts
         #endregion
 
         #region Skills
+
+        public int Gold { get; private set; }   
         [Serializable]
         private struct OwnedSkill
         {
-            public OwnedSkill(SkillsNames skillName, SkillData data, int level = 1)
+            public OwnedSkill(SkillData data, int level = 1)
             {
-                this.skillName = skillName;
                 this.data = data;
                 this.level = level;
             }
 
-            [ReadOnly]
-            public SkillsNames skillName;
-
             [ProgressBar(0, 10, Segmented = true, DrawValueLabel = true), MinValue(1)]
             public int level;
 
-            [ReadOnly]
-            public SkillData data;
+            [ReadOnly] public SkillData data;
         }
 
         /// <summary>
@@ -95,9 +91,9 @@ namespace Roasts
             try
             {
                 rocketData =
-                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/GameSettings/SkillsData/RocketData.asset");
+                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/Resources/SkillsData/RocketData.asset");
                 selfC4 =
-                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/GameSettings/SkillsData/SelfC4Data.asset");
+                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/Resources/SkillsData/SelfC4Data.asset");
             }
             catch (Exception e)
             {
@@ -105,23 +101,19 @@ namespace Roasts
                 throw;
             }
 
-
             ownedSkills.Clear();
-            ownedSkills.Add(SkillSlots.Primary, new OwnedSkill(SkillsNames.Rocket, rocketData));
-            ownedSkills.Add(SkillSlots.Secondary, new OwnedSkill(SkillsNames.SelfC4, selfC4));
+            ownedSkills.Add(SkillSlots.Primary, new OwnedSkill(rocketData));
+            ownedSkills.Add(SkillSlots.Secondary, new OwnedSkill(selfC4));
         }
 
         [Button(ButtonStyle.Box, Name = "Give this player a skill"),
          FoldoutGroup("Skills/Set this player's skills")]
-        public void GiveSkill(SkillsNames skillName)
+        
+        public void GiveSkill(SkillData skillData)
         {
-            var dataAssetName = skillName + "Data.asset";
-
-            var skillData =
-                AssetDatabase.LoadAssetAtPath<SkillData>("Assets/GameSettings/SkillsData/" + dataAssetName);
-
-            ownedSkills.Add((SkillSlots) ownedSkills.Count, new OwnedSkill(skillName, skillData));
+            ownedSkills.Add((SkillSlots) ownedSkills.Count, new OwnedSkill(skillData));
         }
+        
 
         /// <summary>
         ///     This gets called from InputManager to use the SkillName stored in that particular slot.
@@ -174,7 +166,7 @@ namespace Roasts
         }
 
         #endregion
-        
+
         #region Animations
 
         [SerializeField, FoldoutGroup("References", -1)]
@@ -190,6 +182,5 @@ namespace Roasts
         }
 
         #endregion
-
     }
 }
