@@ -21,7 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  goldCost: 5
+  goldCost: 14
   description: 
   coolDownTime: 1.41
   significantAmount: 58.68401
