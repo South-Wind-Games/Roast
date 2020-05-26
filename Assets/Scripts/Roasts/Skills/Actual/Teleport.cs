@@ -9,7 +9,6 @@ namespace Roasts.Skills.Actual
     {
         protected override void OnSkillUse()
         {
-            Debug.Log($"Me movi {data.significantAmount * data.levelIncreaseCurves[0].Evaluate(CurrentLevel * .1f)}");
         }
     }
 }
