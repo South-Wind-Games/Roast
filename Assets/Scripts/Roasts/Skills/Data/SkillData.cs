@@ -15,7 +15,9 @@ namespace Roasts.Skills.Data
 #endif
 
         #region Skill stats
-
+        [BoxGroup("Skill Configuration"), TitleGroup("Skill Configuration/Merchant Stats")]         
+        public string name;
+        
         [BoxGroup("Skill Configuration"), TitleGroup("Skill Configuration/Merchant Stats"), PropertyRange(1, 100),
          SuffixLabel("gold"), GUIColor(1, .9f, .1f)]
         public int goldCost = 1;
@@ -33,8 +35,11 @@ namespace Roasts.Skills.Data
         public float significantAmount = 1;
 
         [BoxGroup("Skill Configuration"), TitleGroup("Skill Configuration/Skill Basics")]
-        public AnimationCurve[] levelIncreaseCurves = {AnimationCurve.Linear(0, 1, 1, 10)};
+        public AnimationCurve levelIncreaseCurve = AnimationCurve.Linear(0, 1, 0, 1);
 
+        [BoxGroup("Skill Configuration"), TitleGroup("Skill Configuration/Skill Basics")]
+        public AnimationCurve goldIncreaseCurve = AnimationCurve.Linear(0, 1, 0, 1);
+       
         [BoxGroup("Skill Configuration"), TitleGroup("Skill Configuration/Animation")]
         public SkillStateMachine.SkillAnimationType animationType;
 
