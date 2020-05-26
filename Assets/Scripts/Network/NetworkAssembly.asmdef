@@ -1,0 +1,15 @@
+{
+    "name": "NetworkAssembly",
+    "references": [
+        "GUID:34e63b206c76d1b438972d62cda20850"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
