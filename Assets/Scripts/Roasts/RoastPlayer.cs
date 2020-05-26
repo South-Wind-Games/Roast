@@ -16,6 +16,8 @@ namespace Roasts
 {
     public class RoastPlayer : SerializedMonoBehaviour, IDamageable
     {
+        public int Gold { get; private set; }   
+
         #region AutoReferences
 
         private void OnValidate()
@@ -61,7 +63,6 @@ namespace Roasts
 
         #region Skills
 
-        public int Gold { get; private set; }   
 
         /// <summary>
         ///     Stores level for each owned skill.
@@ -71,6 +72,7 @@ namespace Roasts
              DisplayMode = DictionaryDisplayOptions.ExpandedFoldout)]
         private Dictionary<SkillSlots, SkillData> ownedSkills = new Dictionary<SkillSlots, SkillData>();
         private Dictionary<SkillData, int> skillLevels = new Dictionary<SkillData, int>();
+        public Dictionary<SkillData, int> OwnedSkills => skillLevels;
 
         private void AddSkill(SkillSlots slot, SkillData skill, int level = 1)
         {
@@ -105,16 +107,15 @@ namespace Roasts
         //TODO: Create editor script
         public void GiveSkill(SkillData skillData)
         {
-            if (true)
-            {
-                AddSkill((SkillSlots) ownedSkills.Count, skillData);
-            }
-            else
+            if (ownedSkills.ContainsValue(skillData))
             {
                 skillLevels[skillData]++;
             }
+            else
+            {
+                AddSkill((SkillSlots) ownedSkills.Count, skillData);
+            }
         }
-
         
         /// <summary>
         ///     This gets called from InputManager to use the SkillName stored in that particular slot.
@@ -160,17 +161,10 @@ namespace Roasts
             }
         }
 
-
         private void InstantiateSkill(SkillBase skillPrefab)
         {
             Instantiate(skillPrefab); // TODO: Spawn correctly, not this shit.
         }
-
-        public int GetLevelForSkill(SkillData skillData)
-        {
-            return skillLevels[skillData];
-        }
-
         #endregion
 
         #region Animations
