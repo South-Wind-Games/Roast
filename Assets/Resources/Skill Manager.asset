@@ -15,10 +15,33 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: eaf36248f7b569845bffaf93f0e1d1b2, type: 2}
+    - {fileID: 11400000, guid: c5ae400c20a99f74ea19150ef4ba059a, type: 2}
+    - {fileID: 11400000, guid: 05a9e3c401ab2154fb8517b0b7fa709e, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
-  SkillsList: []
+    SerializationNodes:
+    - Name: SkillsList
+      Entry: 7
+      Data: 0|Roasts.Skills.Data.SkillData[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
