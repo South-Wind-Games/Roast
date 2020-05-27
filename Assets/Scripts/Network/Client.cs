@@ -148,5 +148,10 @@ namespace Network
                 return packetLength <= 1;
             }
         }
+
+        public void SendData(Packet packet)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
