@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,7 @@ namespace Roasts.Input
 {
     // TODO: It needs to require SkillsController
     [RequireComponent(typeof(RoastController))]
+    [RequireComponent(typeof(RoastPlayer))]
     public class InputManager : MonoBehaviour
     {
         public enum InputMode
@@ -50,24 +52,34 @@ namespace Roasts.Input
 
         [SerializeField, OnValueChanged(nameof(OnInputModeChanged))]
         private InputMode currentInputMode = InputMode.Default;
+
+        [SerializeField] private InputActionAsset inputAsset;
         
+        RoastsInput.RoastMapActions roastInput;
+
 #if UNITY_EDITOR
         private void OnInputModeChanged()
         {
             //TODO: call UI functions here.
         }
 #endif
-        
+
         #region Auto-Reference
 
-        [SerializeField, HideInInspector]
-        private RoastController roastController = null;
+        [SerializeField, HideInInspector] private RoastController roastController = null;
+
+        [SerializeField, HideInInspector] private RoastPlayer roastPlayer = null;
 
         private void OnValidate()
         {
             if (null == roastController)
             {
                 roastController = GetComponent<RoastController>();
+            }
+
+            if (null == roastPlayer)
+            {
+                roastPlayer = GetComponent<RoastPlayer>();
             }
         }
 
@@ -78,11 +90,16 @@ namespace Roasts.Input
             Debug.Log(input.currentControlScheme);
         }*/
 
+        private void Start()
+        {
+            //inputAsset.actionMaps
+        }
+
         public void ChangeInputMode(InputMode newMode)
         {
             currentInputMode = newMode;
         }
-        
+
         public void OnMoveDirection(InputAction.CallbackContext context)
         {
             if (currentInputMode == InputMode.Default)
@@ -100,30 +117,65 @@ namespace Roasts.Input
 
         public void OnSelect(InputAction.CallbackContext context)
         {
-            
         }
 
-        public void OnSelfBomb(InputAction.CallbackContext context)
+        public void OnSkillUse(InputAction.CallbackContext context)
+        {
+            Debug.Log(context.action);
+            Debug.Log(context.action.id);
+            Debug.Log(context.action.name);
+            Debug.Log(context.action.type);
+
+            /*if (/*context.action == roastInput.RoastMap.UsePrimarySkill)
+            {
+            }*/
+        }
+
+        public void OnPrimary(InputAction.CallbackContext context)
         {
         }
 
-        public void OnSkill1(InputAction.CallbackContext context)
+        public void OnSecondary(InputAction.CallbackContext context)
         {
         }
 
-        public void OnSkill2(InputAction.CallbackContext context)
+        public void OnQuickUseRight(InputAction.CallbackContext context)
         {
         }
 
-        public void OnSkill3(InputAction.CallbackContext context)
+        public void OnQuickUseLeft(InputAction.CallbackContext context)
         {
         }
 
-        public void OnSkill4(InputAction.CallbackContext context)
+        public void OnExtraA1(InputAction.CallbackContext context)
         {
         }
 
-        public void OnSkill5(InputAction.CallbackContext context)
+        public void OnExtraA2(InputAction.CallbackContext context)
+        {
+        }
+
+        public void OnExtraA3(InputAction.CallbackContext context)
+        {
+        }
+
+        public void OnExtraA4(InputAction.CallbackContext context)
+        {
+        }
+
+        public void OnExtraB1(InputAction.CallbackContext context)
+        {
+        }
+
+        public void OnExtraB2(InputAction.CallbackContext context)
+        {
+        }
+
+        public void OnExtraB3(InputAction.CallbackContext context)
+        {
+        }
+
+        public void OnExtraB4(InputAction.CallbackContext context)
         {
         }
     }
