@@ -1,65 +1,81 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Roasts.Input;
 using Roasts.Skills.Data;
+using Roasts.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Roasts.Skills
+namespace Roasts.Merchant
 {
     public partial class Merchant
     {
-        [SerializeField] public SkillData[] SkillsList { get; private set; }
+        [SerializeField]
+        private SkillData[] skillsList;
 
-        [SerializeField] private RoastPlayer localPlayer = null;
+        [SerializeField]
+        private RoastPlayer localPlayer = null;
+
+        private HashSet<SkillData> purchasedSkills = new HashSet<SkillData>();
+
 
 #if UNITY_EDITOR
         [Button]
         private void LoadAllSkills()
         {
-            SkillsList = Resources.LoadAll<SkillData>("SkillsData");
+            skillsList = Resources.LoadAll<SkillData>("SkillsData");
         }
 #endif
 
-        public SkillUI.UISkill[] GetAvailableSkills()
+        public SkillUI.UISkill[] GetSkillUpgrades()
         {
-            int UISkillsIndex = 0;
-            SkillUI.UISkill[] UISkills = new SkillUI.UISkill[SkillsList.Length];
-            // Ask player for his skills, convert them to UISKill, add them to the array.
-            SkillData[] playerSkillsDatas = localPlayer.OwnedSkills.Keys.ToArray();
+            var playerOwnedSkills = localPlayer.OwnedSkills.Values;
 
+            int i = 0;
+            SkillUI.UISkill[] UISkills = new SkillUI.UISkill[playerOwnedSkills.Count];
 
-            // Upgrades
-            foreach (var ownedSkill in localPlayer.OwnedSkills)
+            foreach (var ownedSkill in playerOwnedSkills)
             {
-                var ownedSkillKey = ownedSkill.Key;
-                UISkills[UISkillsIndex++] = new SkillUI.UISkill(
-                    ownedSkillKey.name,
-                    ownedSkillKey.description,
-                    Mathf.CeilToInt(ownedSkillKey.goldCost + ownedSkillKey.goldCost *
-                        ownedSkillKey.goldIncreaseCurve.Evaluate((ownedSkill.Value - 1) * .1f)),
-                    null,
-                    ownedSkill.Value);
-            }
-
-
-            // Un owned skills
-            var unOwnedSkills = SkillsList.Except(playerSkillsDatas);
-            foreach (var unOwnedSkill in unOwnedSkills)
-            {
-                UISkills[UISkillsIndex++] = new SkillUI.UISkill(unOwnedSkill.name,
-                    unOwnedSkill.description, unOwnedSkill.goldCost, null);
+                var skillData = ownedSkill.data;
+                UISkills[i++] = new SkillUI.UISkill(skillData.skillName,
+                    skillData.description, skillData.goldCost, null,
+                    ownedSkill.level + 1); // Tenias una tarea, mostrarlo.
             }
 
             return UISkills;
         }
 
-        public void OnPurchase(SkillData skill, RoastPlayer buyer)
+
+        public SkillUI.UISkill[] GetUnOwnedSkills()
         {
-            if (buyer.Gold >= skill.goldCost)
+            int UISkillsIndex = 0;
+
+            var unOwnedSkills = skillsList.Except(purchasedSkills).ToArray();
+            if (unOwnedSkills.Length > 0)
             {
-                buyer.GiveSkill(skill);
+                SkillUI.UISkill[] UISkills = new SkillUI.UISkill[unOwnedSkills.Length];
+
+                foreach (var unOwnedSkill in unOwnedSkills)
+                {
+                    UISkills[UISkillsIndex++] = new SkillUI.UISkill(unOwnedSkill.skillName,
+                        unOwnedSkill.description, unOwnedSkill.goldCost, null);
+                }
+
+                return UISkills;
+            }
+
+            throw new Exception("He owns EVERY SKILL?!?! This should never happen.");
+        }
+
+        [Button(ButtonStyle.Box)]
+        public void OnPurchase(SkillData skillData, RoastPlayer buyer)
+        {
+            if (buyer.Gold >= skillData.goldCost)
+            {
+                buyer.GiveOrUpgradeSkill(skillData);
+                purchasedSkills.Add(skillData);
+
+                buyer.Gold -= skillData.goldCost;
             }
             else
             {
