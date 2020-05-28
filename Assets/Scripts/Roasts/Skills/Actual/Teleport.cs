@@ -17,7 +17,7 @@ namespace Roasts.Skills.Actual
 
        protected override void OnSkillUse()
         {   var transform1 = Owner.transform;
-          IsinRange();        //Check if the mouse pos is in the range of the tp radius
+          IsInRange();        //Check if the mouse pos is in the range of the tp radius
           Calculate(); // calculate the dir of the vector
             if (isInRadius == true)
             {
@@ -39,7 +39,7 @@ namespace Roasts.Skills.Actual
 
         }
 
-       void IsinRange()
+       void IsInRange()
        {
            Vector3 distanceBetween = posClickedMouse -Owner.transform.position;
            float sqrposdistanceBetween = distanceBetween.sqrMagnitude;
