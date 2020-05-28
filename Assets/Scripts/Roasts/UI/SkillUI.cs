@@ -1,8 +1,10 @@
-using Roasts.Skills;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class SkillUI
+namespace Roasts.UI
 {
+    public class SkillUI : SerializedMonoBehaviour
+    {
         public struct UISkill
         {
             public string name;
@@ -21,10 +23,16 @@ public class SkillUI
             }
         }
 
-    Merchant merchant = null;
+        [SerializeField]
+        Merchant.Merchant merchant = null;
 
-    public void DrawAvailableSkills()
-    {
-       UISkill[] skillsToDraw = merchant.GetAvailableSkills();
+        public void DrawAvailableSkills()
+        {
+            var upgrades = merchant.GetSkillUpgrades();
+
+            var unOwnedSkills = merchant.GetUnOwnedSkills();
+
+			// TODO: Draw UI
+        }
     }
 }
