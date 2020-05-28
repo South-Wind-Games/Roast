@@ -1,5 +1,8 @@
-﻿namespace Roasts.Skills
+﻿using System;
+
+namespace Roasts.Merchant
 {
+    [Serializable]
     public partial class Merchant
     {
         
