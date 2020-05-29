@@ -9,12 +9,20 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using static Roasts.Input.InputManager;
-using static Roasts.Skills.SkillManager;
 
 namespace Roasts
 {
     public class RoastPlayer : SerializedMonoBehaviour, IDamageable
     {
+        [ShowInInspector, ReadOnly]
+        private int gold = 100;
+
+        public int Gold
+        {
+            get => gold;
+            set => gold = value;
+        }
+
         #region AutoReferences
 
         private void OnValidate()
@@ -60,34 +68,30 @@ namespace Roasts
         #endregion
 
         #region Skills
+
         [Serializable]
-        private struct OwnedSkill
+        public struct PlayerOwnedSkill
         {
-            public OwnedSkill(SkillsNames skillName, SkillData data, int level = 1)
+            public SkillData data;
+            public int level;
+
+            public PlayerOwnedSkill(SkillData data, int level = 1)
             {
-                this.skillName = skillName;
                 this.data = data;
                 this.level = level;
             }
-
-            [ReadOnly]
-            public SkillsNames skillName;
-
-            [ProgressBar(0, 10, Segmented = true, DrawValueLabel = true), MinValue(1)]
-            public int level;
-
-            [ReadOnly]
-            public SkillData data;
         }
 
-        /// <summary>
-        ///     Stores level for each owned skill.
-        /// </summary>
+
         [SerializeField, BoxGroup("Skills"),
          DictionaryDrawerSettings(KeyLabel = "", ValueLabel = "",
              DisplayMode = DictionaryDisplayOptions.ExpandedFoldout)]
-        private Dictionary<SkillSlots, OwnedSkill> ownedSkills = new Dictionary<SkillSlots, OwnedSkill>();
+        private Dictionary<SkillSlots, PlayerOwnedSkill> ownedSkills = new Dictionary<SkillSlots, PlayerOwnedSkill>();
 
+        public Dictionary<SkillSlots, PlayerOwnedSkill> OwnedSkills => ownedSkills;
+
+
+#if UNITY_EDITOR
         [Button, FoldoutGroup("Skills/Set this player's skills")]
         private void SetDefaultSkills()
         {
@@ -95,9 +99,9 @@ namespace Roasts
             try
             {
                 rocketData =
-                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/GameSettings/SkillsData/RocketData.asset");
+                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/Resources/SkillsData/RocketData.asset");
                 selfC4 =
-                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/GameSettings/SkillsData/SelfC4Data.asset");
+                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/Resources/SkillsData/SelfC4Data.asset");
             }
             catch (Exception e)
             {
@@ -105,22 +109,35 @@ namespace Roasts
                 throw;
             }
 
+            ownedSkills?.Clear();
 
-            ownedSkills.Clear();
-            ownedSkills.Add(SkillSlots.Primary, new OwnedSkill(SkillsNames.Rocket, rocketData));
-            ownedSkills.Add(SkillSlots.Secondary, new OwnedSkill(SkillsNames.SelfC4, selfC4));
+            AddSkill(SkillSlots.Primary, rocketData);
+            AddSkill(SkillSlots.Secondary, selfC4);
+        }
+#endif
+
+
+        //TODO: Create editor script
+        public void GiveOrUpgradeSkill(SkillData skillData)
+        {
+            foreach (var keyValuePair in ownedSkills)
+            {
+                if (keyValuePair.Value.data == skillData)
+                {
+                    AddSkill(keyValuePair.Key, skillData, keyValuePair.Value.level + 1);
+                    return;
+                }
+            }
+
+            AddSkill((SkillSlots) ownedSkills.Count, skillData);
         }
 
-        [Button(ButtonStyle.Box, Name = "Give this player a skill"),
-         FoldoutGroup("Skills/Set this player's skills")]
-        public void GiveSkill(SkillsNames skillName)
+        private void AddSkill(SkillSlots slot, SkillData data, int level = 1)
         {
-            var dataAssetName = skillName + "Data.asset";
+            if (null == ownedSkills)
+                ownedSkills = new Dictionary<SkillSlots, PlayerOwnedSkill>();
 
-            var skillData =
-                AssetDatabase.LoadAssetAtPath<SkillData>("Assets/GameSettings/SkillsData/" + dataAssetName);
-
-            ownedSkills.Add((SkillSlots) ownedSkills.Count, new OwnedSkill(skillName, skillData));
+            ownedSkills[slot] = new PlayerOwnedSkill(data, level);
         }
 
         /// <summary>
@@ -130,16 +147,17 @@ namespace Roasts
         /// <param name="slot">Which skillSlot should be used.</param>
         public void UseSkill(SkillSlots slot)
         {
-            StartCoroutine(RoastSkillAnimationRoutine(ownedSkills[slot].data));
+            StartCoroutine(RoastSkillAnimationRoutine(ownedSkills[slot]));
         }
 
-        private IEnumerator RoastSkillAnimationRoutine(SkillData skillData)
+        private IEnumerator RoastSkillAnimationRoutine(PlayerOwnedSkill skill)
         {
+            var skillData = skill.data;
             var skillPrefab = skillData.skillPrefab;
 
             if (skillData.animationType == SkillStateMachine.SkillAnimationType.None)
             {
-                InstantiateSkill(skillData.skillPrefab);
+                InstantiateAndUseSkill(skill, skillPrefab);
             }
             else
             {
@@ -150,7 +168,7 @@ namespace Roasts
                     animationDone = false;
                     yield return new WaitUntil(() => animationDone);
 
-                    InstantiateSkill(skillData.skillPrefab);
+                    InstantiateAndUseSkill(skill, skillPrefab);
                 }
 
                 if (skillData.animationType == SkillStateMachine.SkillAnimationType.PostAnimation ||
@@ -161,20 +179,28 @@ namespace Roasts
                     {
                         animationDone = false;
                         yield return new WaitUntil(() => animationDone);
-                        InstantiateSkill(skillData.skillPrefab);
+                        InstantiateAndUseSkill(skill, skillPrefab);
                     }
                 }
             }
         }
 
-
-        private void InstantiateSkill(SkillBase skillPrefab)
+        private void InstantiateAndUseSkill(PlayerOwnedSkill skill, SkillBase skillPrefab)
         {
-            Instantiate(skillPrefab); // TODO: Spawn correctly, not this shit.
+            InstantiateSkill(skillPrefab).Use(this, skill.level);
+        }
+
+        private SkillBase InstantiateSkill(SkillBase skillPrefab)
+        {
+            SkillBase instantiatedSkill = Instantiate(skillPrefab); // TODO: Spawn correctly, not this shit.
+
+            // TODO: QUE ALGUIEN HAGA ALGO
+
+            return instantiatedSkill;
         }
 
         #endregion
-        
+
         #region Animations
 
         [SerializeField, FoldoutGroup("References", -1)]
@@ -190,6 +216,5 @@ namespace Roasts
         }
 
         #endregion
-
     }
 }

@@ -24,62 +24,21 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: skillsList
+    - Name: SkillsList
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[Roasts.Skills.SkillManager+SkillsNames,
-        Assembly-CSharp],[Roasts.Skills.Data.SkillData, Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Roasts.Skills.SkillManager+SkillsNames,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 0|Roasts.Skills.Data.SkillData[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 0
-    - Name: $v
       Entry: 10
       Data: 0
     - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 1
-    - Name: $v
       Entry: 10
       Data: 1
     - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 2
-    - Name: $v
       Entry: 10
       Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
