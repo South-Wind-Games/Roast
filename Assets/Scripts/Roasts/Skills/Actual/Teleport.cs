@@ -27,7 +27,7 @@ namespace Roasts.Skills.Actual
             else
             {
                 farthestPosToTp = vectorDirection * (data.significantAmount + data.significantAmount *
-                    data.levelIncreaseCurves[0].Evaluate((CurrentLevel - 1) / 10f));
+                    data.levelIncreaseCurve.Evaluate((CurrentLevel - 1) / 10f));
 
                 transform1.position = transform1.position + farthestPosToTp;
 
@@ -57,7 +57,7 @@ namespace Roasts.Skills.Actual
        void Calculate()
        {
            vectorDirection = (posClickedMouse - Owner.transform.position).normalized;
-           Debug.Log(vectorDirection);
+          
        }
 
     }
