@@ -1,4 +1,5 @@
-﻿using System;
+﻿﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Roasts.Base
@@ -6,8 +7,35 @@ namespace Roasts.Base
     [Serializable]
     public class HP : IDamageable
     {
-        private float currentHP;
-        private readonly float maxHP;
+        [ShowInInspector, ProgressBar(0, nameof(MaxHP), ColorMember = nameof(GetHPColor)),
+         InlineButton(nameof(FullyHeal))]
+        private float currentHP = 100;
+
+#if UNITY_EDITOR
+        private Color GetHPColor(float value)
+        {
+            return Color.Lerp(Color.red, Color.green, value / MaxHP);
+        }
+
+        private void FullyHeal()
+        {
+            currentHP = MaxHP;
+        }
+
+        [Button(ButtonStyle.Box)]
+        private void SetMaxHP(float maxHP = 100)
+        {
+            if(maxHP <= 0)
+                return;
+                
+            this.maxHP = maxHP;
+            currentHP = Mathf.Min(maxHP, currentHP);
+        }
+#endif
+
+        private float maxHP = 100;
+        public float MaxHP => maxHP;
+
         public bool IsAlive { get; private set; }
 
         public float CurrentHP
@@ -24,7 +52,6 @@ namespace Roasts.Base
             }
         }
 
-        public float MaxHP => maxHP;
 
         public HP(float maxHP = 100)
         {

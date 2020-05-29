@@ -36,8 +36,8 @@ namespace Roasts.Input
         {
             Primary,
             Secondary,
-            QuickUseLeft,
             QuickUseRight,
+            QuickUseLeft,
             Extra_A1,
             Extra_A2,
             Extra_A3,
@@ -45,7 +45,7 @@ namespace Roasts.Input
             Extra_B1,
             Extra_B2,
             Extra_B3,
-            Extra_B4,
+            Extra_B4
         }
 
         [SerializeField, OnValueChanged(nameof(OnInputModeChanged))]

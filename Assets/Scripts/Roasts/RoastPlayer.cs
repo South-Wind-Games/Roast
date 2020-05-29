@@ -9,12 +9,20 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using static Roasts.Input.InputManager;
-using static Roasts.Skills.SkillManager;
 
 namespace Roasts
 {
     public class RoastPlayer : SerializedMonoBehaviour, IDamageable
     {
+        [ShowInInspector, ReadOnly]
+        private int gold = 100;
+
+        public int Gold
+        {
+            get => gold;
+            set => gold = value;
+        }
+
         #region AutoReferences
 
         private void OnValidate()
@@ -24,61 +32,6 @@ namespace Roasts
         }
 
         #endregion
-
-        /// <summary>
-        ///     This gets called from InputManager to use the SkillName stored in that particular slot.
-        ///     We then ask the skillManager to give use the prefab that corresponds with that SkillName."/>
-        /// </summary>
-        /// <param name="slot">Which skillSlot should be used.</param>
-        public void UseSkill(SkillSlots slot)
-        {
-            StartCoroutine(RoastSkillAnimationRoutine(ownedSkills[slot].data));
-        }
-
-        private IEnumerator RoastSkillAnimationRoutine(SkillData skillData)
-        {
-            var skillPrefab = skillData.skillPrefab;
-
-            if (skillData.animationType == SkillStateMachine.SkillAnimationType.None)
-            {
-                InstantiateSkill(skillData.skillPrefab);
-            }
-            else
-            {
-                if (skillData.animationType == SkillStateMachine.SkillAnimationType.PreAnimation ||
-                    skillData.animationType == SkillStateMachine.SkillAnimationType.Both)
-                {
-                    animator.SetTrigger(PreAnimate);
-                    animationDone = false;
-                    yield return new WaitUntil(() => animationDone);
-
-                    InstantiateSkill(skillData.skillPrefab);
-                }
-
-                if (skillData.animationType == SkillStateMachine.SkillAnimationType.PostAnimation ||
-                    skillData.animationType == SkillStateMachine.SkillAnimationType.Both)
-                {
-                    animator.SetTrigger(PostAnimate);
-                    if (skillData.animationType == SkillStateMachine.SkillAnimationType.PostAnimation)
-                    {
-                        animationDone = false;
-                        yield return new WaitUntil(() => animationDone);
-                        InstantiateSkill(skillData.skillPrefab);
-                    }
-                }
-            }
-        }
-
-
-        private void InstantiateSkill(SkillBase skillPrefab)
-        {
-            Instantiate(skillPrefab); // TODO: Spawn correctly, not this shit.
-        }
-
-        public void OnAnimationComplete()
-        {
-            animationDone = true;
-        }
 
         #region IDamageable
 
@@ -114,6 +67,140 @@ namespace Roasts
 
         #endregion
 
+        #region Skills
+
+        [Serializable]
+        public struct PlayerOwnedSkill
+        {
+            public SkillData data;
+            public int level;
+
+            public PlayerOwnedSkill(SkillData data, int level = 1)
+            {
+                this.data = data;
+                this.level = level;
+            }
+        }
+
+
+        [SerializeField, BoxGroup("Skills"),
+         DictionaryDrawerSettings(KeyLabel = "", ValueLabel = "",
+             DisplayMode = DictionaryDisplayOptions.ExpandedFoldout)]
+        private Dictionary<SkillSlots, PlayerOwnedSkill> ownedSkills = new Dictionary<SkillSlots, PlayerOwnedSkill>();
+
+        public Dictionary<SkillSlots, PlayerOwnedSkill> OwnedSkills => ownedSkills;
+
+
+#if UNITY_EDITOR
+        [Button, FoldoutGroup("Skills/Set this player's skills")]
+        private void SetDefaultSkills()
+        {
+            SkillData rocketData, selfC4;
+            try
+            {
+                rocketData =
+                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/Resources/SkillsData/RocketData.asset");
+                selfC4 =
+                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/Resources/SkillsData/SelfC4Data.asset");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            ownedSkills?.Clear();
+
+            AddSkill(SkillSlots.Primary, rocketData);
+            AddSkill(SkillSlots.Secondary, selfC4);
+        }
+#endif
+
+
+        //TODO: Create editor script
+        public void GiveOrUpgradeSkill(SkillData skillData)
+        {
+            foreach (var keyValuePair in ownedSkills)
+            {
+                if (keyValuePair.Value.data == skillData)
+                {
+                    AddSkill(keyValuePair.Key, skillData, keyValuePair.Value.level + 1);
+                    return;
+                }
+            }
+
+            AddSkill((SkillSlots) ownedSkills.Count, skillData);
+        }
+
+        private void AddSkill(SkillSlots slot, SkillData data, int level = 1)
+        {
+            if (null == ownedSkills)
+                ownedSkills = new Dictionary<SkillSlots, PlayerOwnedSkill>();
+
+            ownedSkills[slot] = new PlayerOwnedSkill(data, level);
+        }
+
+        /// <summary>
+        ///     This gets called from InputManager to use the SkillName stored in that particular slot.
+        ///     We then ask the skillManager to give use the prefab that corresponds with that SkillName."/>
+        /// </summary>
+        /// <param name="slot">Which skillSlot should be used.</param>
+        public void UseSkill(SkillSlots slot)
+        {
+            StartCoroutine(RoastSkillAnimationRoutine(ownedSkills[slot]));
+        }
+
+        private IEnumerator RoastSkillAnimationRoutine(PlayerOwnedSkill skill)
+        {
+            var skillData = skill.data;
+            var skillPrefab = skillData.skillPrefab;
+
+            if (skillData.animationType == SkillStateMachine.SkillAnimationType.None)
+            {
+                InstantiateAndUseSkill(skill, skillPrefab);
+            }
+            else
+            {
+                if (skillData.animationType == SkillStateMachine.SkillAnimationType.PreAnimation ||
+                    skillData.animationType == SkillStateMachine.SkillAnimationType.Both)
+                {
+                    animator.SetTrigger(PreAnimate);
+                    animationDone = false;
+                    yield return new WaitUntil(() => animationDone);
+
+                    InstantiateAndUseSkill(skill, skillPrefab);
+                }
+
+                if (skillData.animationType == SkillStateMachine.SkillAnimationType.PostAnimation ||
+                    skillData.animationType == SkillStateMachine.SkillAnimationType.Both)
+                {
+                    animator.SetTrigger(PostAnimate);
+                    if (skillData.animationType == SkillStateMachine.SkillAnimationType.PostAnimation)
+                    {
+                        animationDone = false;
+                        yield return new WaitUntil(() => animationDone);
+                        InstantiateAndUseSkill(skill, skillPrefab);
+                    }
+                }
+            }
+        }
+
+        private void InstantiateAndUseSkill(PlayerOwnedSkill skill, SkillBase skillPrefab)
+        {
+            InstantiateSkill(skillPrefab).Use(this, skill.level);
+        }
+
+        private SkillBase InstantiateSkill(SkillBase skillPrefab)
+        {
+            SkillBase instantiatedSkill = Instantiate(skillPrefab); // TODO: Spawn correctly, not this shit.
+
+            // TODO: QUE ALGUIEN HAGA ALGO
+
+            return instantiatedSkill;
+        }
+
+        #endregion
+
         #region Animations
 
         [SerializeField, FoldoutGroup("References", -1)]
@@ -123,71 +210,9 @@ namespace Roasts
         private static readonly int PreAnimate = Animator.StringToHash("PreAnimate");
         private static readonly int PostAnimate = Animator.StringToHash("PostAnimate");
 
-        #endregion
-
-        #region Skills
-
-        [Serializable]
-        private struct OwnedSkill
+        public void OnAnimationComplete()
         {
-            public OwnedSkill(SkillsNames skillName, SkillData data, int level = 1)
-            {
-                this.skillName = skillName;
-                this.data = data;
-                this.level = level;
-            }
-
-            [ReadOnly]
-            public SkillsNames skillName;
-
-            [ProgressBar(0, 10, Segmented = true, DrawValueLabel = true), MinValue(1)]
-            public int level;
-
-            [ReadOnly]
-            public SkillData data;
-        }
-
-        /// <summary>
-        ///     Stores level for each owned skill.
-        /// </summary>
-        [SerializeField, BoxGroup("Skills"),
-         DictionaryDrawerSettings(KeyLabel = "", ValueLabel = "",
-             DisplayMode = DictionaryDisplayOptions.ExpandedFoldout)]
-        private Dictionary<SkillSlots, OwnedSkill> ownedSkills = new Dictionary<SkillSlots, OwnedSkill>();
-
-        [Button, FoldoutGroup("Skills/Set this player's skills")]
-        private void SetDefaultSkills()
-        {
-            SkillData rocketData, selfC4;
-            try
-            {
-                rocketData =
-                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/GameSettings/SkillsData/RocketData.asset");
-                selfC4 =
-                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/GameSettings/SkillsData/SelfC4Data.asset");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
-
-            ownedSkills.Clear();
-            ownedSkills.Add(SkillSlots.Primary, new OwnedSkill(SkillsNames.Rocket, rocketData));
-            ownedSkills.Add(SkillSlots.Secondary, new OwnedSkill(SkillsNames.SelfC4, selfC4));
-        }
-
-        [Button(ButtonStyle.Box, Name = "Give this player a skill"),
-         FoldoutGroup("Skills/Set this player's skills")]
-        public void GiveSkill(SkillsNames skillName)
-        {
-            var dataAssetName = skillName + "Data.asset";
-
-            var skillData =
-                AssetDatabase.LoadAssetAtPath<SkillData>("Assets/GameSettings/SkillsData/" + dataAssetName);
-
-            ownedSkills.Add((SkillSlots) ownedSkills.Count, new OwnedSkill(skillName, skillData));
+            animationDone = true;
         }
 
         #endregion
