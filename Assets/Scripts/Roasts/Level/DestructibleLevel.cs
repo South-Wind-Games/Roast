@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestructibleLevel : Level
+namespace Roasts.Level
 {
+    public class DestructibleLevel : Level
+    {
 
+    }
 }
