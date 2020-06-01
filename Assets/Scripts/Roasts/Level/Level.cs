@@ -2,7 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class Level : MonoBehaviour
-{
-   
+namespace Roasts.Level
+{ 
+    abstract public class Level : MonoBehaviour
+    {
+
+        float roundTime;
+
+        void StartRound()
+        {
+
+        }
+    }
 }
+
