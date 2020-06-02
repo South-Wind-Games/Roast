@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using Roasts;
 using UnityEngine;
 
-public class RangeModifiers : Effect
+namespace Roasts.Item.Effects
 {
-    public override void ApplyEffect(RoastPlayer roastPlayer)
+    public class RangeModifiers : Effect
     {
-        throw new System.NotImplementedException();
-    }
+        public override void ApplyEffect( )
+        {
+            stats.rangeModifiers += amount;
+        }
 
-    public override void DisableEffect(RoastPlayer roastPlayer)
-    {
-        throw new System.NotImplementedException();
+        public override void DisableEffect( )
+        {
+            stats.rangeModifiers += amount;
+        }
     }
 }
