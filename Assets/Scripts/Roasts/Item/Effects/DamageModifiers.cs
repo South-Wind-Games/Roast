@@ -13,7 +13,7 @@ namespace Roasts.Item.Effects
         }
         public override void DisableEffect( )
         {
-            stats.damageModifers += amount;
+            stats.damageModifers -= amount;
         }
     }
 }
