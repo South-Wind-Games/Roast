@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using Roasts;
 using UnityEngine;
 
-public class HPFlatModification : Effect
+namespace Roasts.Item.Effects
 {
-    public override void ApplyEffect(RoastPlayer roastPlayer)
+    public class HpFlatModification : Effect
     {
-        throw new System.NotImplementedException();
+        public override void ApplyEffect( )
+        {
+            stats.hpFlatModification += amount;
+        }
+
+        public override void DisableEffect( )
+        {
+            stats.hpFlatModification += amount;
+        }
     }
 
-    public override void DisableEffect(RoastPlayer roastPlayer)
-    {
-        throw new System.NotImplementedException();
-    }
 }
