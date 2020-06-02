@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using Roasts;
 using UnityEngine;
 
-public class CoolDownReduction : Effect
+namespace Roasts.Item.Effects
 {
-    public override void ApplyEffect(RoastPlayer roastPlayer)
+    
+    public class CoolDownReduction : Effect
     {
-        throw new System.NotImplementedException();
-    }
+        public override void ApplyEffect()
+        {
+            stats.coolDownPercentageReduction += amount;
+        }
 
-    public override void DisableEffect(RoastPlayer roastPlayer)
-    {
-        throw new System.NotImplementedException();
+        public override void DisableEffect()
+        {
+            stats.coolDownPercentageReduction += amount;
+        }
     }
 }
