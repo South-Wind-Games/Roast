@@ -14,7 +14,7 @@ namespace Roasts.Item.Effects
 
         public override void DisableEffect( )
         {
-            stats.rangeModifiers += amount;
+            stats.rangeModifiers -= amount;
         }
     }
 }
