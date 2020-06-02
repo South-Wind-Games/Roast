@@ -14,7 +14,7 @@ namespace Roasts.Item.Effects
 
         public override void DisableEffect( )
         {
-            stats.hpPercentageModifiaction += amount;
+            stats.hpPercentageModifiaction -= amount;
         }
     }
     
