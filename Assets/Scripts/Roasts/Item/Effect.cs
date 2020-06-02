@@ -1,14 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Roasts;
+using Roasts.Input;
 using UnityEditor.Compilation;
 using UnityEngine;
 
-public abstract class Effect
+namespace Roasts.Item
 {
-    private float amount;
-    
-    public abstract void ApplyEffect(RoastPlayer roastPlayer);
-    
-    public abstract void DisableEffect(RoastPlayer roastPlayer);
+    [Serializable]
+    public abstract class Effect
+    {
+        public float amount;
+        public Stats stats;
+
+        public abstract void ApplyEffect();
+
+        public abstract void DisableEffect();
+    }
 }
