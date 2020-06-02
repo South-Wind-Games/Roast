@@ -15,7 +15,7 @@ namespace Roasts.Item.Effects
 
         public override void DisableEffect()
         {
-            stats.coolDownPercentageReduction += amount;
+            stats.coolDownPercentageReduction -= amount;
         }
     }
 }
