@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Roasts;
+using Roasts.Input;
 using UnityEngine;
 
-public class MovementSpeedModification : Effect
+namespace Roasts.Item.Effects
 {
-    public override void ApplyEffect(RoastPlayer roastPlayer)
+    public class MovementSpeedModification : Effect
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void DisableEffect(RoastPlayer roastPlayer)
-    {
-        throw new System.NotImplementedException();
+        public override void ApplyEffect()
+        {
+            stats.movementSpeedModification += amount;
+        }
+        public override void DisableEffect( )
+        {
+            stats.movementSpeedModification -= amount;
+        }
     }
 }
