@@ -1,18 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using Roasts;
+using System.IO;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class Item
+namespace Roasts.Item
 {
-    private Effect[] effects;
-
-    public void ApplyEffects(RoastPlayer roastPlayer)
+    [CreateAssetMenu(fileName = "New Item")]
+    public class Item : SerializedScriptableObject
     {
-        
+        public enum SlotType
+        {
+            Boots
+        }
+        public string name;
+        public SlotType slot;
+        public string description;
+        public Item[] requeriments;
+        public int price;
+        public Effect[] effects;
     }
-    public void DisableEffects(RoastPlayer roastPlayer)
-    {
-        
-    }
+   
 }
