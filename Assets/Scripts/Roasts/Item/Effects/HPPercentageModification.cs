@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using Roasts;
 using UnityEngine;
 
-public class HPPercentageModification : Effect
+namespace Roasts.Item.Effects
 {
-    public override void ApplyEffect(RoastPlayer roastPlayer)
+    public class HpPercentageModification : Effect
     {
-        throw new System.NotImplementedException();
-    }
+        public override void ApplyEffect( )
+        {
+            stats.hpPercentageModifiaction += amount;
+        }
 
-    public override void DisableEffect(RoastPlayer roastPlayer)
-    {
-        throw new System.NotImplementedException();
+        public override void DisableEffect( )
+        {
+            stats.hpPercentageModifiaction += amount;
+        }
     }
+    
 }
