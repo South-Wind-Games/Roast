@@ -18,12 +18,16 @@ namespace Roasts.Merchant
 
         private HashSet<SkillData> purchasedSkills = new HashSet<SkillData>();
 
-
 #if UNITY_EDITOR
         [Button]
         private void LoadAllSkills()
         {
             skillsList = Resources.LoadAll<SkillData>("SkillsData");
+        }
+
+        private void OnValidate()
+        {
+            localPlayer = FindObjectOfType<RoastPlayer>();
         }
 #endif
 
@@ -44,7 +48,6 @@ namespace Roasts.Merchant
 
             return UISkills;
         }
-
 
         public SkillUI.UISkill[] GetUnOwnedSkills()
         {
@@ -67,30 +70,20 @@ namespace Roasts.Merchant
             throw new Exception("He owns EVERY SKILL?!?! This should never happen.");
         }
 
-        [Button(ButtonStyle.Box)]
-        public void OnPurchase(SkillData skillData, RoastPlayer buyer)
+        [Button("Simulate Skill Purchase",ButtonStyle.Box)]
+        public void OnPurchase(SkillData skillData)
         {
-            if (buyer.Gold >= skillData.goldCost)
+            if (localPlayer.Gold >= skillData.goldCost)
             {
-                buyer.GiveOrUpgradeSkill(skillData);
+                localPlayer.UpgradeOrAddSkill(skillData);
                 purchasedSkills.Add(skillData);
 
-                buyer.Gold -= skillData.goldCost;
+                localPlayer.Gold -= skillData.goldCost;
             }
             else
             {
                 Debug.Log("Not enough gold");
             }
         }
-
-        //[SerializeField,
-        // DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.OneLine,
-        // KeyLabel = "", ValueLabel = "")]
-        //private Dictionary<SkillsNames, SkillData> skillsList = new Dictionary<SkillsNames, SkillData>();
-
-        //public SkillData GetSkillData(SkillsNames whichSkillNames)
-        //{
-        //    return skillsList[whichSkillNames];
-        //}
     }
 }
