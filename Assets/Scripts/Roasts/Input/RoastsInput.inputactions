@@ -40,13 +40,93 @@
                 {
                     "name": "UsePrimarySkill",
                     "type": "Button",
-                    "id": "dc6a5ef6-d261-4b5f-944d-2b13149e0300",
+                    "id": "0e5136fc-d91c-4b32-82f9-5d5fd7d52341",
                     "expectedControlType": "Button",
                     "processors": "ScaleVector2(x=0.5,y=0.5)",
                     "interactions": ""
                 },
                 {
                     "name": "UseSecondarySkill",
+                    "type": "Button",
+                    "id": "dc6a5ef6-d261-4b5f-944d-2b13149e0300",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseQuickRightSkill",
+                    "type": "Button",
+                    "id": "7d862956-7454-4800-8fda-dc3ab2ee60a4",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseQuickLeftSkill",
+                    "type": "Button",
+                    "id": "d65acaf1-43e8-4973-b9db-c5a78d660e49",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseExtra_A1Skill",
+                    "type": "Button",
+                    "id": "f140f0ab-48a9-4ed6-96fa-f2b89d9ab9a5",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseExtra_A2Skill",
+                    "type": "Button",
+                    "id": "6704b424-c09e-41f9-885c-866b74449ef1",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseExtra_A3Skill",
+                    "type": "Button",
+                    "id": "a93f6723-21c5-4962-8425-14bfaf9f9681",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseExtra_A4Skill",
+                    "type": "Button",
+                    "id": "947f3193-e4f9-41db-b901-62bfb34c4f9b",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseExtra_B1Skill",
+                    "type": "Button",
+                    "id": "1f25ea4c-241a-4a84-bfba-e2eabc2fc6e0",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseExtra_B2Skill",
+                    "type": "Button",
+                    "id": "b20ed81f-f2b9-4cd4-bbce-39b3f0557719",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseExtra_B3Skill",
+                    "type": "Button",
+                    "id": "57b149eb-91b0-4317-83cd-fcfe545374ba",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseExtra_B4Skill",
                     "type": "Button",
                     "id": "17b6f430-af56-44d2-96f5-4aa89715a498",
                     "expectedControlType": "Button",
@@ -72,7 +152,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "KB&M WASD",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -83,7 +163,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "KB&M WASD",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -94,7 +174,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "KB&M WASD",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -105,7 +185,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "KB&M WASD",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -138,7 +218,7 @@
                     "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "KB&M Warlocks",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -149,7 +229,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "KB&M Warlocks",
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -160,7 +240,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "KB&M Warlocks",
                     "action": "MoveToCoordinates",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -171,7 +251,7 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "KB&M Warlocks",
                     "action": "UsePrimarySkill",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -182,8 +262,118 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "KB&M Warlocks",
                     "action": "UseSecondarySkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2065fe81-a357-4ff1-a041-112344dd5973",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M Warlocks",
+                    "action": "UseQuickRightSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "baf6fa9c-7ef9-42b5-8b9d-a684fa2ecca6",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M Warlocks",
+                    "action": "UseQuickLeftSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2fce799d-03e8-4857-adbd-61672c5df4d7",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M Warlocks",
+                    "action": "UseExtra_A1Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "94fd7c09-5a5c-4bcd-baf2-4ebc11fa7023",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M Warlocks",
+                    "action": "UseExtra_A2Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "309abae5-137d-443d-b780-3d5208255f34",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M Warlocks",
+                    "action": "UseExtra_A3Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3209cc99-7529-4ed4-a8b2-b929fdadcf90",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M Warlocks",
+                    "action": "UseExtra_A4Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "00573ba7-f317-4810-b39f-58619b74e620",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M Warlocks",
+                    "action": "UseExtra_B1Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd6e2676-2098-4287-a509-79c5688bee6c",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M Warlocks",
+                    "action": "UseExtra_B2Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "232f2469-41e8-461a-8054-c296702e8ce6",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M Warlocks",
+                    "action": "UseExtra_B3Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c595d6a8-e42e-4f8d-9cf0-e8e75d1075ef",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB&M Warlocks",
+                    "action": "UseExtra_B4Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -192,8 +382,8 @@
     ],
     "controlSchemes": [
         {
-            "name": "KeyboardAndMouse",
-            "bindingGroup": "KeyboardAndMouse",
+            "name": "KB&M Warlocks",
+            "bindingGroup": "KB&M Warlocks",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
@@ -213,6 +403,22 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "KB&M WASD",
+            "bindingGroup": "KB&M WASD",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }
