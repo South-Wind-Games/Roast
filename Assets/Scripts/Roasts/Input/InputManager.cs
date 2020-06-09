@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Roasts.Input
@@ -53,22 +55,25 @@ namespace Roasts.Input
         [SerializeField, OnValueChanged(nameof(OnInputModeChanged))]
         private InputMode currentInputMode = InputMode.Default;
 
-        [SerializeField] private InputActionAsset inputAsset;
-        
-        RoastsInput.RoastMapActions roastInput;
+        private RoastsInput roastInput;
+
+        [ShowInInspector, 
+         DictionaryDrawerSettings(IsReadOnly = true, DisplayMode = DictionaryDisplayOptions.OneLine)]
+        private Dictionary<Guid, UnityEvent> skills;
 
 #if UNITY_EDITOR
         private void OnInputModeChanged()
         {
-            //TODO: call UI functions here.
+            //TODO: call UI functions here
         }
 #endif
-
         #region Auto-Reference
 
-        [SerializeField, HideInInspector] private RoastController roastController = null;
+        [SerializeField, HideInInspector]
+        private RoastController roastController = null;
 
-        [SerializeField, HideInInspector] private RoastPlayer roastPlayer = null;
+        [SerializeField, HideInInspector]
+        private RoastPlayer roastPlayer = null;
 
         private void OnValidate()
         {
@@ -90,9 +95,14 @@ namespace Roasts.Input
             Debug.Log(input.currentControlScheme);
         }*/
 
-        private void Start()
+        private void Awake()
         {
-            //inputAsset.actionMaps
+            roastInput = new RoastsInput();
+            skills = new Dictionary<Guid, UnityEvent>()
+            {
+                {roastInput.RoastMap.UsePrimarySkill.id, new UnityEvent()},
+                {roastInput.RoastMap.UseSecondarySkill.id, new UnityEvent()},
+            };
         }
 
         public void ChangeInputMode(InputMode newMode)
@@ -121,62 +131,10 @@ namespace Roasts.Input
 
         public void OnSkillUse(InputAction.CallbackContext context)
         {
-            Debug.Log(context.action);
-            Debug.Log(context.action.id);
-            Debug.Log(context.action.name);
-            Debug.Log(context.action.type);
-
-            /*if (/*context.action == roastInput.RoastMap.UsePrimarySkill)
+            if (context.performed)
             {
-            }*/
-        }
-
-        public void OnPrimary(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnSecondary(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnQuickUseRight(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnQuickUseLeft(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnExtraA1(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnExtraA2(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnExtraA3(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnExtraA4(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnExtraB1(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnExtraB2(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnExtraB3(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnExtraB4(InputAction.CallbackContext context)
-        {
+                skills[context.action.id]?.Invoke();
+            }
         }
     }
 }
