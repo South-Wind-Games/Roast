@@ -36,6 +36,22 @@
                     "expectedControlType": "Button",
                     "processors": "ScaleVector2(x=0.5,y=0.5)",
                     "interactions": ""
+                },
+                {
+                    "name": "UsePrimarySkill",
+                    "type": "Button",
+                    "id": "dc6a5ef6-d261-4b5f-944d-2b13149e0300",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseSecondarySkill",
+                    "type": "Button",
+                    "id": "17b6f430-af56-44d2-96f5-4aa89715a498",
+                    "expectedControlType": "Button",
+                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -56,7 +72,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "KeyboardAndMouse",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -67,7 +83,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "KeyboardAndMouse",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -78,7 +94,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "KeyboardAndMouse",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -89,7 +105,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "KeyboardAndMouse",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -122,7 +138,7 @@
                     "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "KeyboardAndMouse",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -133,7 +149,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "KeyboardAndMouse",
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -144,8 +160,30 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "KeyboardAndMouse",
                     "action": "MoveToCoordinates",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b66836d-8e3d-479f-9cde-ee94d982036b",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "UsePrimarySkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d2f3b7be-e1f9-4df1-a9b1-a5ccdb8a8645",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "UseSecondarySkill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -154,8 +192,8 @@
     ],
     "controlSchemes": [
         {
-            "name": "Default",
-            "bindingGroup": "Default",
+            "name": "KeyboardAndMouse",
+            "bindingGroup": "KeyboardAndMouse",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
