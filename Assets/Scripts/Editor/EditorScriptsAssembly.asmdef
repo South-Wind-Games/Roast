@@ -1,6 +1,8 @@
 {
     "name": "EditorScriptsAssembly",
-    "references": [],
+    "references": [
+        "GUID:a37b0ff25cca6544680165ef101d7c27"
+    ],
     "includePlatforms": [
         "Editor"
     ],
