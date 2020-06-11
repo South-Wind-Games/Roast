@@ -410,7 +410,7 @@ PrefabInstance:
     - target: {fileID: 8525967665018322937, guid: 4904c2c9813e25741871d95cb7751d1b,
         type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"ownedSkills","value":null'
+      value: '"path":"slotsToPlayerOwnedSkills","value":null'
       objectReference: {fileID: 0}
     - target: {fileID: 9060272976174125301, guid: 4904c2c9813e25741871d95cb7751d1b,
         type: 3}
