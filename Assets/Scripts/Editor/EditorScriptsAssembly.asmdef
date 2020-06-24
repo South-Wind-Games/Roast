@@ -1,0 +1,17 @@
+{
+    "name": "EditorScriptsAssembly",
+    "references": [
+        "GUID:a37b0ff25cca6544680165ef101d7c27"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
