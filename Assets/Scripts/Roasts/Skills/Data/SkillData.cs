@@ -17,9 +17,8 @@ namespace Roasts.Skills.Data
 #endif
 
         #region Skill stats
-
-        [BoxGroup("Skill Configuration"), TitleGroup("Skill Configuration/Merchant Stats")]
-        public string skillName = "New Skill";
+        // [BoxGroup("Skill Configuration"), TitleGroup("Skill Configuration/Merchant Stats")]
+        // public string skillName = "New Skill";
 
         [BoxGroup("Skill Configuration"), TitleGroup("Skill Configuration/Merchant Stats"), PropertyRange(1, 100),
          SuffixLabel("gold"), GUIColor(1, .9f, .1f)]

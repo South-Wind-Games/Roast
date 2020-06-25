@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using Roasts.Skills.Data;
-using Roasts.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using static Roasts.RoastPlayer;
 
 namespace Roasts.Merchant
 {
     public partial class Merchant
     {
-        [SerializeField]
+        [SerializeField, ReadOnly]
         private SkillData[] skillsList;
 
-        [SerializeField]
+        [SerializeField, ReadOnly]
         private RoastPlayer localPlayer = null;
 
         private HashSet<SkillData> purchasedSkills = new HashSet<SkillData>();
-
 
 #if UNITY_EDITOR
         [Button]
@@ -25,57 +24,44 @@ namespace Roasts.Merchant
         {
             skillsList = Resources.LoadAll<SkillData>("SkillsData");
         }
+
+        private void OnValidate()
+        {
+            InitializeMerchant();
+        }
 #endif
 
-        public SkillUI.UISkill[] GetSkillUpgrades()
+        private void InitializeMerchant()
         {
-            var playerOwnedSkills = localPlayer.OwnedSkills.Values;
-
-            int i = 0;
-            SkillUI.UISkill[] UISkills = new SkillUI.UISkill[playerOwnedSkills.Count];
-
-            foreach (var ownedSkill in playerOwnedSkills)
-            {
-                var skillData = ownedSkill.data;
-                UISkills[i++] = new SkillUI.UISkill(skillData.skillName,
-                    skillData.description, skillData.goldCost, null,
-                    ownedSkill.level + 1); // Tenias una tarea, mostrarlo.
-            }
-
-            return UISkills;
+            if (null == localPlayer)
+                localPlayer = FindObjectOfType<RoastPlayer>();
+            if (null == skillsList)
+                LoadAllSkills();
         }
 
-
-        public SkillUI.UISkill[] GetUnOwnedSkills()
+        private void Awake()
         {
-            int UISkillsIndex = 0;
-
-            var unOwnedSkills = skillsList.Except(purchasedSkills).ToArray();
-            if (unOwnedSkills.Length > 0)
-            {
-                SkillUI.UISkill[] UISkills = new SkillUI.UISkill[unOwnedSkills.Length];
-
-                foreach (var unOwnedSkill in unOwnedSkills)
-                {
-                    UISkills[UISkillsIndex++] = new SkillUI.UISkill(unOwnedSkill.skillName,
-                        unOwnedSkill.description, unOwnedSkill.goldCost, null);
-                }
-
-                return UISkills;
-            }
-
-            throw new Exception("He owns EVERY SKILL?!?! This should never happen.");
+            InitializeMerchant();
         }
 
-        [Button(ButtonStyle.Box)]
-        public void OnPurchase(SkillData skillData, RoastPlayer buyer)
+        public PlayerOwnedSkill[] GetSkillUpgrades()
         {
-            if (buyer.Gold >= skillData.goldCost)
-            {
-                buyer.GiveOrUpgradeSkill(skillData);
-                purchasedSkills.Add(skillData);
+            return localPlayer.OwnedSkills;
+        }
 
-                buyer.Gold -= skillData.goldCost;
+        public SkillData[] GetUnOwnedSkills()
+        {
+            return skillsList.Except(purchasedSkills).ToArray();
+        }
+
+        public void OnPurchaseSkill(SkillData newSkill)
+        {
+            if (localPlayer.Gold >= newSkill.goldCost)
+            {
+                localPlayer.PurchaseNewSkill(newSkill);
+                purchasedSkills.Add(newSkill);
+
+                localPlayer.Gold -= newSkill.goldCost;
             }
             else
             {
@@ -83,14 +69,9 @@ namespace Roasts.Merchant
             }
         }
 
-        //[SerializeField,
-        // DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.OneLine,
-        // KeyLabel = "", ValueLabel = "")]
-        //private Dictionary<SkillsNames, SkillData> skillsList = new Dictionary<SkillsNames, SkillData>();
-
-        //public SkillData GetSkillData(SkillsNames whichSkillNames)
-        //{
-        //    return skillsList[whichSkillNames];
-        //}
+        public void OnUpgradeSkill(PlayerOwnedSkill ownedSkill)
+        {
+            localPlayer.UpgradeSkill(ownedSkill);
+        }
     }
 }
