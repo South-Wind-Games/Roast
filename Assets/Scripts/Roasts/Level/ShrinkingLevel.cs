@@ -22,7 +22,7 @@ namespace Roasts.Level
 
         void Start()
         {
-
+            //ff
             //curve = new AnimationCurve(new Keyframe(1, 0), new Keyframe(1, 5));
             shrinkingCurve.preWrapMode = WrapMode.Default;
             shrinkingCurve.postWrapMode = WrapMode.Default;

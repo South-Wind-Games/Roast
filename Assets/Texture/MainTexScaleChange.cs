@@ -15,6 +15,6 @@ public class MainTexScaleChange : MonoBehaviour
     void Update()
     {
         GetComponent<Renderer>().material.mainTextureScale = new Vector2(scaleX, scaleY);
-        
+        //ff
     }
 }
