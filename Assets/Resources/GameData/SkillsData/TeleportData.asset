@@ -21,7 +21,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  skillName: New Skill
   goldCost: 14
   description: You see me, now you don't.
   coolDownTime: 1.41
@@ -66,6 +65,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationType: 3
-  skillPrefab: {fileID: 0}
+  skillPrefab: {fileID: 8626410444250648871, guid: 750dadf68caf386408eb36c03162c4b1,
+    type: 3}
   onCreateInstantiate: {fileID: 0}
   onDestroyInstantiate: {fileID: 0}
