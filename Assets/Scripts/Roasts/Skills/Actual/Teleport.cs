@@ -1,64 +1,49 @@
-﻿using System;
-using System.Collections;
-using Roasts.Skills.Behaviour;
+﻿using Roasts.Skills.Behaviour;
 using Roasts.Skills.Data;
 using UnityEngine;
 
 namespace Roasts.Skills.Actual
 {
     public class Teleport : Skill<SkillData>
-    {  
-        public Vector3 farthestPosToTp;   // this is the position to jump when the mouse click is out of range
-        private bool isInRadius;          // check if the mouse click in range
-        public Vector3 posClickedMouse;  // where the mouse is click
+    {
+        public Vector3 farthestPosToTp; // this is the position to jump when the mouse click is out of range
+        public Vector3 posClickedMouse; // where the mouse is click
 
-        public Vector3 vectorDirection;  // Its use when the position is out of range
-        
+        private float sqrRange = 0;
 
-       protected override void OnSkillUse()
-        {   var transform1 = Owner.transform;
-          IsInRange();        //Check if the mouse pos is in the range of the tp radius
-          Calculate(); // calculate the dir of the vector
-            if (isInRadius == true)
+        private void Awake()
+        {
+            sqrRange = data.significantAmount * data.significantAmount;
+        }
+
+        protected override void OnSkillUse(
+            Vector3 aimDirection = new Vector3(),
+            Vector3 faceDirection = new Vector3())
+        {
+            var ownersTransform = owner.transform;
+
+            if (IsInRange())
             {
-                transform1.position = posClickedMouse;     //if its true, just tp to that pos 
-                Debug.Log("entro con true");
+                ownersTransform.position = posClickedMouse; //if its true, just tp to that pos 
             }
             else
             {
-                farthestPosToTp = vectorDirection * (data.significantAmount + data.significantAmount *
-                    data.levelIncreaseCurve.Evaluate((CurrentLevel - 1) / 10f));
+                farthestPosToTp = Calculate() * (data.significantAmount + data.significantAmount *
+                    data.levelIncreaseCurve.Evaluate((CurrentLevel - 1) * .1f));
 
-                transform1.position = transform1.position + farthestPosToTp;
-
-
-                Debug.Log("entró en false");
+                ownersTransform.position = ownersTransform.position + farthestPosToTp;
             }
-
-
-
         }
 
-       void IsInRange()
-       {
-           Vector3 distanceBetween = posClickedMouse -Owner.transform.position;
-           float sqrposdistanceBetween = distanceBetween.sqrMagnitude;
-            
-           if (sqrposdistanceBetween > data.significantAmount * data.significantAmount)
-           {
-               isInRadius = false;
-           }
-           else
-           {
-               isInRadius = true;
-           }
-       }
+        private bool IsInRange()
+        {
+            Vector3 distanceBetween = posClickedMouse - owner.transform.position;
+            return distanceBetween.sqrMagnitude <= sqrRange;
+        }
 
-       void Calculate()
-       {
-           vectorDirection = (posClickedMouse - Owner.transform.position).normalized;
-          
-       }
-
+        private Vector3 Calculate() // TODO: Fuck this
+        {
+            return (posClickedMouse - owner.transform.position).normalized;
+        }
     }
 }
