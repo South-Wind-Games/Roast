@@ -58,7 +58,7 @@ namespace Roasts.Input
             LENGTH
         }
 
-        [ShowInInspector, ReadOnly,
+        [SerializeField, ReadOnly,
          DictionaryDrawerSettings(IsReadOnly = true, DisplayMode = DictionaryDisplayOptions.OneLine)]
         private Dictionary<Guid, SkillSlots> skills = new Dictionary<Guid, SkillSlots>();
 
@@ -87,6 +87,11 @@ namespace Roasts.Input
         public void RegisterSkill(SkillSlots slot)
         {
             skills[actions[slot].action.id] = slot;
+        }
+
+        public void CleanRegisteredSkills()
+        {
+            skills?.Clear();
         }
 
         #endregion
@@ -158,12 +163,6 @@ namespace Roasts.Input
 
         #endregion
 
-        /*public void OnSchemeChanged(PlayerInput input)
-        {
-            Debug.Log(input.currentControlScheme);
-        }*/
-
-
         public void ChangeInputMode(InputMode newMode)
         {
             currentInputMode = newMode;
@@ -192,7 +191,13 @@ namespace Roasts.Input
         {
             if (context.performed)
             {
-                roastPlayer.UseSkill(skills[context.action.id]);
+                if (skills.ContainsKey(context.action.id))
+                    //TODO: Enviar direction al mouse normal
+                    //TODO: Enviar magnitud de lo arriba ↑
+                    //TODO: y enviar direccion en la que está mirando
+                    roastPlayer.UseSkill(skills[context.action.id]);
+                else
+                    Debug.Log("Pressed a slot without a skill assigned.");
             }
         }
     }
