@@ -26,7 +26,7 @@
                     "type": "Button",
                     "id": "8b6d7769-f0a9-43d3-a673-2d92f1070e74",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -34,7 +34,7 @@
                     "type": "Button",
                     "id": "3f42bc93-bd6c-49d2-a3e3-b9c23ea15896",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -42,7 +42,7 @@
                     "type": "Button",
                     "id": "0e5136fc-d91c-4b32-82f9-5d5fd7d52341",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -50,7 +50,7 @@
                     "type": "Button",
                     "id": "dc6a5ef6-d261-4b5f-944d-2b13149e0300",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -58,7 +58,7 @@
                     "type": "Button",
                     "id": "7d862956-7454-4800-8fda-dc3ab2ee60a4",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -66,7 +66,7 @@
                     "type": "Button",
                     "id": "d65acaf1-43e8-4973-b9db-c5a78d660e49",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -74,7 +74,7 @@
                     "type": "Button",
                     "id": "f140f0ab-48a9-4ed6-96fa-f2b89d9ab9a5",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -82,7 +82,7 @@
                     "type": "Button",
                     "id": "6704b424-c09e-41f9-885c-866b74449ef1",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -90,7 +90,7 @@
                     "type": "Button",
                     "id": "a93f6723-21c5-4962-8425-14bfaf9f9681",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -98,7 +98,7 @@
                     "type": "Button",
                     "id": "947f3193-e4f9-41db-b901-62bfb34c4f9b",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -106,7 +106,7 @@
                     "type": "Button",
                     "id": "1f25ea4c-241a-4a84-bfba-e2eabc2fc6e0",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -114,7 +114,7 @@
                     "type": "Button",
                     "id": "b20ed81f-f2b9-4cd4-bbce-39b3f0557719",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -122,7 +122,7 @@
                     "type": "Button",
                     "id": "57b149eb-91b0-4317-83cd-fcfe545374ba",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -130,7 +130,7 @@
                     "type": "Button",
                     "id": "17b6f430-af56-44d2-96f5-4aa89715a498",
                     "expectedControlType": "Button",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "",
                     "interactions": ""
                 }
             ],

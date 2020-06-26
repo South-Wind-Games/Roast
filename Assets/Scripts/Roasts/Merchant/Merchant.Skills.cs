@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Roasts.Skills.Data;
 using Sirenix.OdinInspector;
@@ -22,7 +21,7 @@ namespace Roasts.Merchant
         [Button]
         private void LoadAllSkills()
         {
-            skillsList = Resources.LoadAll<SkillData>("SkillsData");
+            skillsList = Resources.LoadAll<SkillData>("GameData/SkillsData");
         }
 
         private void OnValidate()

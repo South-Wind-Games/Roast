@@ -9,7 +9,6 @@ using Roasts.Skills.Behaviour;
 using Roasts.Skills.Data;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using UnityEditor;
 using UnityEngine;
 using static Roasts.Input.InputManager;
 
@@ -128,10 +127,8 @@ namespace Roasts
             SkillData rocketData, selfC4;
             try
             {
-                rocketData =
-                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/Resources/SkillsData/RocketData.asset");
-                selfC4 =
-                    AssetDatabase.LoadAssetAtPath<SkillData>("Assets/Resources/SkillsData/SelfC4Data.asset");
+                rocketData = Resources.Load<SkillData>("GameData/SkillsData/RocketData");
+                selfC4 = Resources.Load<SkillData>("GameData/SkillsData/SelfC4Data");
             }
             catch (Exception e)
             {
@@ -141,10 +138,33 @@ namespace Roasts
 
             playerOwnedSkillsToSlots?.Clear();
             slotsToPlayerOwnedSkills?.Clear();
+            inputManager.CleanRegisteredSkills();
 
             AddSkill(SkillSlots.Primary, rocketData);
             AddSkill(SkillSlots.Secondary, selfC4);
         }
+
+        [Button, FoldoutGroup("Skills/Default Skills")]
+        private void SetTeleport()
+        {
+            SkillData tpData;
+            try
+            {
+                tpData = Resources.Load<SkillData>("GameData/SkillsData/TeleportData");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            playerOwnedSkillsToSlots?.Clear();
+            slotsToPlayerOwnedSkills?.Clear();
+            inputManager.CleanRegisteredSkills();
+
+            AddSkill(SkillSlots.Primary, tpData);
+        }
+
 #endif
 
         public void PurchaseNewSkill(SkillData newSkill)
@@ -194,7 +214,9 @@ namespace Roasts
         /// <param name="slot">Which skillSlot should be used.</param>
         public void UseSkill(SkillSlots slot)
         {
-            StartCoroutine(RoastSkillAnimationRoutine(slotsToPlayerOwnedSkills[slot]));
+            InstantiateAndUseSkill(slotsToPlayerOwnedSkills[slot]);
+
+            // StartCoroutine(RoastSkillAnimationRoutine(slotsToPlayerOwnedSkills[slot]));
         }
 
         private IEnumerator RoastSkillAnimationRoutine(PlayerOwnedSkill skill)
@@ -204,7 +226,7 @@ namespace Roasts
 
             if (skillData.animationType == SkillStateMachine.SkillAnimationType.None)
             {
-                InstantiateAndUseSkill(skill, skillPrefab);
+                InstantiateAndUseSkill(skill);
             }
             else
             {
@@ -215,7 +237,7 @@ namespace Roasts
                     animationDone = false;
                     yield return new WaitUntil(() => animationDone);
 
-                    InstantiateAndUseSkill(skill, skillPrefab);
+                    InstantiateAndUseSkill(skill);
                 }
 
                 if (skillData.animationType == SkillStateMachine.SkillAnimationType.PostAnimation ||
@@ -226,15 +248,15 @@ namespace Roasts
                     {
                         animationDone = false;
                         yield return new WaitUntil(() => animationDone);
-                        InstantiateAndUseSkill(skill, skillPrefab);
+                        InstantiateAndUseSkill(skill);
                     }
                 }
             }
         }
 
-        private void InstantiateAndUseSkill(PlayerOwnedSkill skill, SkillBase skillPrefab)
+        private void InstantiateAndUseSkill(PlayerOwnedSkill skill)
         {
-            InstantiateSkill(skillPrefab).Use(this, skill.Level);
+            InstantiateSkill(skill.Data.skillPrefab).Use(this, skill.Level); //TODO: Acá finalemente, pasan las 3 cosas nuevas :(
         }
 
         private SkillBase InstantiateSkill(SkillBase skillPrefab)

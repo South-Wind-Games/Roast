@@ -55,6 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -79,6 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5409357265892804189
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +136,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -158,6 +161,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6652867664407431472
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,18 +218,16 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: eaf36248f7b569845bffaf93f0e1d1b2, type: 2}
-    - {fileID: 11400000, guid: c5ae400c20a99f74ea19150ef4ba059a, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: ownedSkills
+    - Name: slotsToPlayerOwnedSkills
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[Roasts.Input.InputManager+SkillSlots,
-        RoastAssembly],[Roasts.RoastPlayer+OwnedSkill, RoastAssembly]], mscorlib
+        RoastAssembly],[Roasts.RoastPlayer+PlayerOwnedSkill, RoastAssembly]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Roasts.Input.InputManager+SkillSlots,
@@ -250,16 +252,7 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 7
-      Data: Roasts.RoastPlayer+OwnedSkill, RoastAssembly
-    - Name: skillName
-      Entry: 3
-      Data: 0
-    - Name: level
-      Entry: 3
-      Data: 1
-    - Name: data
-      Entry: 10
-      Data: 0
+      Data: 2|Roasts.RoastPlayer+PlayerOwnedSkill, RoastAssembly
     - Name: 
       Entry: 8
       Data: 
@@ -274,22 +267,33 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 7
-      Data: Roasts.RoastPlayer+OwnedSkill, RoastAssembly
-    - Name: skillName
-      Entry: 3
-      Data: 1
-    - Name: level
-      Entry: 3
-      Data: 1
-    - Name: data
-      Entry: 10
-      Data: 1
+      Data: 3|Roasts.RoastPlayer+PlayerOwnedSkill, RoastAssembly
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 8
       Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: playerOwnedSkillsToSlots
+      Entry: 7
+      Data: 4|System.Collections.Generic.Dictionary`2[[Roasts.RoastPlayer+PlayerOwnedSkill,
+        RoastAssembly],[Roasts.Input.InputManager+SkillSlots, RoastAssembly]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 5|System.Collections.Generic.ObjectEqualityComparer`1[[Roasts.RoastPlayer+PlayerOwnedSkill,
+        RoastAssembly]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
@@ -326,6 +330,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnMoveDirection
         m_Mode: 0
         m_Arguments:
@@ -345,6 +350,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnSelect
         m_Mode: 0
         m_Arguments:
@@ -360,6 +366,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnMouseMoveTo
         m_Mode: 0
         m_Arguments:
@@ -372,6 +379,198 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3f42bc93-bd6c-49d2-a3e3-b9c23ea15896
     m_ActionName: Roast Map/MoveToCoordinates[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dc6a5ef6-d261-4b5f-944d-2b13149e0300
+    m_ActionName: Roast Map/UseSkill[/Keyboard/q,/Keyboard/w,/Keyboard/e,/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 17b6f430-af56-44d2-96f5-4aa89715a498
+    m_ActionName: Roast Map/UseSecondarySkill[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: Roasts.Input.InputManager, RoastAssembly
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0e5136fc-d91c-4b32-82f9-5d5fd7d52341
+    m_ActionName: Roast Map/UsePrimarySkill[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: Roasts.Input.InputManager, RoastAssembly
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7d862956-7454-4800-8fda-dc3ab2ee60a4
+    m_ActionName: Roast Map/UseQuickRightSkill[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: Roasts.Input.InputManager, RoastAssembly
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d65acaf1-43e8-4973-b9db-c5a78d660e49
+    m_ActionName: Roast Map/UseQuickLeftSkill[/Keyboard/ctrl]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: Roasts.Input.InputManager, RoastAssembly
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f140f0ab-48a9-4ed6-96fa-f2b89d9ab9a5
+    m_ActionName: Roast Map/UseExtra_A1Skill[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: Roasts.Input.InputManager, RoastAssembly
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6704b424-c09e-41f9-885c-866b74449ef1
+    m_ActionName: Roast Map/UseExtra_A2Skill[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: Roasts.Input.InputManager, RoastAssembly
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a93f6723-21c5-4962-8425-14bfaf9f9681
+    m_ActionName: Roast Map/UseExtra_A3Skill[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: Roasts.Input.InputManager, RoastAssembly
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 947f3193-e4f9-41db-b901-62bfb34c4f9b
+    m_ActionName: Roast Map/UseExtra_A4Skill[/Keyboard/g]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: Roasts.Input.InputManager, RoastAssembly
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f25ea4c-241a-4a84-bfba-e2eabc2fc6e0
+    m_ActionName: Roast Map/UseExtra_B1Skill[/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: Roasts.Input.InputManager, RoastAssembly
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b20ed81f-f2b9-4cd4-bbce-39b3f0557719
+    m_ActionName: Roast Map/UseExtra_B2Skill[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9060272976174125301}
+        m_TargetAssemblyTypeName: Roasts.Input.InputManager, RoastAssembly
+        m_MethodName: OnSkillUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 57b149eb-91b0-4317-83cd-fcfe545374ba
+    m_ActionName: Roast Map/UseExtra_B3Skill[/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Roast Map
@@ -389,8 +588,245 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e9ddbb3ebe8fa4c9bac20984062aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentInputMode: 1
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 3830586670073222416, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: -4307932555664603529, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: -3177313557921486881, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: -6952439490034430119, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: 4509158732096212751, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: 6235065422284691317, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: 5778272101574069550, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: 6699781209581366669, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: -3382799354253613441, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: 3770616793126909655, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: 138641840901444189, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    - {fileID: 6032192805593931591, guid: d9747768879417843b2a772cf493b4d1, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: skills
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.Guid, mscorlib],[Roasts.Input.InputManager+SkillSlots,
+        RoastAssembly]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.Guid,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 2
+      Data: 0e5136fcd91c4b3282f95d5fd7d52341
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 2
+      Data: dc6a5ef6d2614b5f944d2b13149e0300
+    - Name: $v
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: actions
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[Roasts.Input.InputManager+SkillSlots,
+        RoastAssembly],[UnityEngine.InputSystem.InputActionReference, Unity.InputSystem]],
+        mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[Roasts.Input.InputManager+SkillSlots,
+        RoastAssembly]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 12
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5
+    - Name: $v
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 6
+    - Name: $v
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 7
+    - Name: $v
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 8
+    - Name: $v
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 9
+    - Name: $v
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 10
+    - Name: $v
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 11
+    - Name: $v
+      Entry: 10
+      Data: 11
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  currentInputMode: 0
   roastController: {fileID: 6652867664407431465}
+  roastPlayer: {fileID: 8525967665018322937}
 --- !u!114 &6652867664407431465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +865,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -453,6 +890,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!95 &9096800900620212133
 Animator:
   serializedVersion: 3
