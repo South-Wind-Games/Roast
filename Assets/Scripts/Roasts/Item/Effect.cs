@@ -8,14 +8,38 @@ using UnityEngine;
 
 namespace Roasts.Item
 {
-    [Serializable]
     public abstract class Effect
     {
-        public float amount;
-        public Stats stats;
-
-        public abstract void ApplyEffect();
-
-        public abstract void DisableEffect();
+        protected float amount;
+    }
+    
+    public class CoolDownReduction : Effect
+    {
+        
+    }
+    
+    public class DamageModifiers : Effect
+    {
+       
+    }
+    
+    public class HpFlatModification : Effect
+    {
+        
+    }
+    
+    public class HpPercentageModification : Effect
+    {
+       
+    }
+    
+    public class MovementSpeedModification : Effect
+    {
+       
+    }
+    
+    public class RangeModifiers : Effect
+    {
+        
     }
 }
