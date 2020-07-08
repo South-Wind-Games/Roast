@@ -6,8 +6,7 @@ namespace Roasts.Level
 { 
     abstract public class Level : MonoBehaviour
     {
-
-        float roundTime;
+        [SerializeField] protected float roundTime;
 
         void StartRound()
         {
